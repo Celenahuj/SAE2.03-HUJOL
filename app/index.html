@@ -14,6 +14,7 @@
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
+      import { Movie } from "./component/Movie/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -28,8 +29,11 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
+        V.renderMovie();
       };
 
+      
+        
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
@@ -45,7 +49,12 @@
         header.innerHTML = NavBar.format(hAbout);
       };
 
-      C.start(); // Démarre l'application
+      V.renderMovie = function (image, title) {
+        let content = document.querySelector("#content");
+        content.innerHTML = Movie.format(image, title);
+      };
+
+      C.start(); 
     </script>
   </body>
 </html>
