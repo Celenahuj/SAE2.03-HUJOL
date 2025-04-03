@@ -8,5 +8,4 @@ DataMovie.requestMovies = async function(){
     return data;
 }
 
-
 export {DataMovie};
