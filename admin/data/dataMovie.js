@@ -1,8 +1,8 @@
 let HOST_URL = "https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL";
 
-let DataMenu = {};
+let DataMovie = {};
 
-DataMenu.add = async function (fdata) {
+DataMovie.add = async function (fdata) {
    let config = {
        method: "POST",
        body: fdata 
@@ -13,4 +13,4 @@ DataMenu.add = async function (fdata) {
 }
 
 
-export {DataMenu};
+export {DataMovie};

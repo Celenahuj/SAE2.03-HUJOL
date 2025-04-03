@@ -14,16 +14,10 @@
 
   <script type="module">
     import { Log } from "./component/Log/script.js";
-    import { DataMenu } from "./data/dataMenu.js";
-    import { AddMenuForm } from './component/MovieForm/script.js';
+    import { DataMovie } from "./data/dataMovie.js";
+    import { AddMovieForm } from './component/MovieForm/script.js';
 
     window.C = {};
-
-    C.start = function () {
-      V.renderLog("Démarrage de l'application");
-      V.renderNewMenu("C.handlerAdd()");
-
-    };
 
     C.handlerAdd = async function () {
       // Sélectionne l'élément possédant la classe `.addMenu__form`
@@ -42,10 +36,16 @@
       */
       let fd = new FormData(form);
       // Attend la réponse de la fonction `DataMenu.update(fd)`
-      let res = await DataMenu.add(fd);
+      let res = await DataMovie.add(fd);
       // Affiche le résultat de la mise à jour dans le journal
       V.renderLog(res);
     }
+
+    C.start = function () {
+      V.renderLog("Démarrage de l'application");
+      V.renderNewMenu("C.handlerAdd()");
+
+    };
 
     window.V = {};
 
