@@ -14,9 +14,9 @@
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
 define("HOST", "localhost");
-define("DBNAME", "mora");
-define("DBLOGIN", "root");
-define("DBPWD", "root");
+define("DBNAME", "hujol3");
+define("DBLOGIN", "hujol3");
+define("DBPWD", "hujol3");
 
 function getMenu()
 {
