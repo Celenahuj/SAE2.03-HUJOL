@@ -18,7 +18,7 @@ define("DBNAME", "hujol3");
 define("DBLOGIN", "hujol3");
 define("DBPWD", "hujol3");
 
-function getMenu()
+function getMovie()
 {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);

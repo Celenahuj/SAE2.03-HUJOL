@@ -1,4 +1,4 @@
-let HOST_URL = "https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL/server/";
+let HOST_URL = "https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL";
 
 let DataMovie = {};
 

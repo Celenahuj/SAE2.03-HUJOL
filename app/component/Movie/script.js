@@ -2,10 +2,14 @@ let templateFile = await fetch("./component/Movie/template.html");
 let template = await templateFile.text();
 
 let Movie = {};
-Movie.format = function (image, title) {
-  let html = template;
-  html = html.replace("{{image}}", image);
-  html = html.replace("{{title}}", title);
+Movie.format = function (movies) {
+  let html = "";
+  movies.array.forEach((movie)=> {
+    let moviehtml = template;
+    moviehtml = moviehtml.replace("{{image}}", movie.image);
+    moviehtml = moviehtml.replace("{{title}}", movie.title);
+    html+=moviehtml;
+  });
   return html;
 };
 
