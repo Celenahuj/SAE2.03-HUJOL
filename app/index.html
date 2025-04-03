@@ -49,9 +49,9 @@
         header.innerHTML = NavBar.format(hAbout);
       };
 
-      V.renderMovie = function (image, title) {
+      V.renderMovie = function (data) {
         let content = document.querySelector("#content");
-        content.innerHTML = Movie.format(image, title);
+        content.innerHTML = Movie.format(data);
       };
 
       C.start(); 
