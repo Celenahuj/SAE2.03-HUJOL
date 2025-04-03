@@ -18,7 +18,6 @@
     import { NavBar } from "./component/NavBar/script.js";
     import { Movie } from "./component/Movie/script.js";
     import { DataMovie } from "./data/dataMovie.js";
-    import { AddMovieForm } from './component/MovieForm/script.js';
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -30,28 +29,6 @@
         "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
       );
     };
-
-    C.handler = async function () {
-      // Sélectionne l'élément possédant la classe `.addMenu__form`
-      // il s'agit de l'élément <form> du composant NewMenuForm
-      let form = document.querySelector('.addMenu__form');
-      /* 
-          Il faut comprendre l'instruction "new FormData(form)" ainsi : 
-          "créer un nouvel objet FormData à partir du formulaire form"
-          Les objets FormData sont des objets natifs du langage Javascript.
-          Très pratique, les créer revient à extraire automatiquement les données
-          du formulaire sous forme de paires clé/valeur ou la clé est le nom de
-          l'élément du formulaire et la valeur est la valeur de l'élément.
-          Par exemple : {jour: 'lundi', entree: 'salade', plat: 'steak', dessert: 'tarte'}
-          Surtout un FormData peut être placé tel quel dans le corps (body) d'une requête
-          HTTP pour être envoyé à un serveur.
-      */
-      let fd = new FormData(form);
-      // Attend la réponse de la fonction `DataMenu.update(fd)`
-      let res = await DataMenu.add(fd);
-      // Affiche le résultat de la mise à jour dans le journal
-      V.renderLog(res);
-    }
 
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
@@ -83,11 +60,6 @@
       let content = document.querySelector("#content");
       content.innerHTML = Movie.format(data);
     };
-
-    V.renderNewMenu = function (handler) {
-      let content = document.querySelector('#addMovie');
-      content.innerHTML = AddMenuForm.format(handler);
-    }
 
     C.start(); 
   </script>
