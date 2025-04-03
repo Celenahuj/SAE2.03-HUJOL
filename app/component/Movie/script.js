@@ -7,7 +7,7 @@ Movie.format = function (movies) {
   movies.forEach((movie)=> {
     let moviehtml = template;
     moviehtml = moviehtml.replace("{{image}}", movie.image);
-    moviehtml = moviehtml.replace("{{title}}", movie.title);
+    moviehtml = moviehtml.replace("{{title}}", movie.name);
     html+=moviehtml;
   });
   return html;

@@ -1,9 +1,51 @@
 .movies {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  justify-content: center;
+  padding: 2rem;
 }
 
+/* Style de chaque carte */
 .movie {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative; /* Nécessaire pour positionner le titre en bas */
+  border-radius: 8px;
+  overflow: hidden; /* Cache les parties en dehors de la carte */
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Ajout de transition sur la couleur de fond */
+}
+
+/* Effet de survol sur la carte */
+.movie:hover {
+  transform: scale(1.05); /* Légère mise en valeur de la carte */
+  background-color: rgba(0, 0, 0, 0.7); /* Ajout d'un fond noir semi-transparent au survol */
+}
+
+/* Image de la carte */
+.movie_img {
+  width: 100%; /* L'image occupe toute la largeur du conteneur */
+  height: 200px; /* Fixe la hauteur de l'image */
+  object-fit: cover; /* L'image remplit l'espace sans déformation, et elle est recadrée si nécessaire */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transition pour les effets visuels */
+}
+
+/* Titre du film */
+.movie_title {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%); /* Centre le titre horizontalement */
+  font-size: 1.2em; /* Ajuste la taille du titre */
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Ombre pour améliorer la lisibilité */
+  opacity: 0; /* Titre invisible par défaut */
+  transition: opacity 0.3s ease; /* Transition pour l'apparition du titre */
+}
+
+/* Affichage du titre au survol */
+.movie:hover .movie_title {
+  opacity: 1; /* Le titre devient visible au survol */
 }
