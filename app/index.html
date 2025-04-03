@@ -29,9 +29,13 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
-        V.renderMovie();
+        C.getMovie();
       };
 
+      C.getMovie = async function(){
+        let data =  await DataMovie.requestMovie();
+        V.renderMovie(data);
+      }
       
         
       // Vue (contient tout ce qui est relatif à l'affichage)
