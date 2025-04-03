@@ -33,3 +33,23 @@ function getMovie()
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $rest) {
+    global $pdo;
+    
+    $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
+            VALUES (:titre, :annee, :duree, :description, :realisateur, :categorie, :image, :url, :restriction)";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':titre', $titre);
+    $stmt->bindParam(':annee', $annee);
+    $stmt->bindParam(':duree', $duree);
+    $stmt->bindParam(':description', $desc);
+    $stmt->bindParam(':realisateur', $real);
+    $stmt->bindParam(':categorie', $cat);  // Vérifie que `id_category` est bien envoyé
+    $stmt->bindParam(':image', $image);
+    $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':restriction', $rest);
+    
+    return $stmt->execute();
+}
