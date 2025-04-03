@@ -21,10 +21,11 @@
     C.start = function () {
       V.renderLog("Démarrage de l'application");
       V.renderNewMenu();
+      V.renderNewMenu("C.handleradd()");
 
     };
 
-    C.handler = async function () {
+    C.handleradd = async function () {
       // Sélectionne l'élément possédant la classe `.addMenu__form`
       // il s'agit de l'élément <form> du composant NewMenuForm
       let form = document.querySelector('.addMenu__form');
