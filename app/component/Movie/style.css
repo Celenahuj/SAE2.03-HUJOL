@@ -25,10 +25,12 @@
 
 /* Image de la carte */
 .movie_img {
-  width: 100%; /* L'image occupe toute la largeur du conteneur */
+  width: 100%;  /* L'image occupe toute la largeur du conteneur */
   height: 200px; /* Fixe la hauteur de l'image */
-  object-fit: cover; /* L'image remplit l'espace sans déformation, et elle est recadrée si nécessaire */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Transition pour les effets visuels */
+  object-fit: cover; /* L'image couvre tout l'espace sans déformation et est recadrée si nécessaire */
+  display: block; /* Pour éviter tout espacement supplémentaire en dessous de l'image */
+  margin: 0; /* Enlève tout espacement autour de l'image */
+  border-bottom: 2px solid #fff; /* Bordure blanche en bas de l'image pour ajouter de la séparation */
 }
 
 /* Titre du film */
