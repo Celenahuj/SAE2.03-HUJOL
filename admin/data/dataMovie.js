@@ -1,6 +1,6 @@
 let HOST_URL = "https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL";
 
-let DataMovie = {};
+let DataMenu = {};
 
 DataMenu.add = async function (fdata) {
    let config = {
@@ -13,4 +13,4 @@ DataMenu.add = async function (fdata) {
 }
 
 
-export {DataMovie};
+export {DataMenu};
