@@ -1,53 +1,45 @@
 .movies {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
   padding: 2rem;
 }
 
-/* Style de chaque carte */
 .movie {
-  position: relative; /* Nécessaire pour positionner le titre en bas */
+  position: relative;
+  overflow: hidden;
   border-radius: 8px;
-  overflow: hidden; /* Cache les parties en dehors de la carte */
-  max-width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, background-color 0.3s ease; /* Ajout de transition sur la couleur de fond */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Effet de survol sur la carte */
 .movie:hover {
-  transform: scale(1.05); /* Légère mise en valeur de la carte */
-  background-color: rgba(0, 0, 0, 0.7); /* Ajout d'un fond noir semi-transparent au survol */
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Image de la carte */
 .movie_img {
-  width: 100%;  /* L'image occupe toute la largeur du conteneur */
-  height: 200px; /* Fixe la hauteur de l'image */
-  object-fit: cover; /* L'image couvre tout l'espace sans déformation et est recadrée si nécessaire */
-  display: block; /* Pour éviter tout espacement supplémentaire en dessous de l'image */
-  margin: 0; /* Enlève tout espacement autour de l'image */
-  border-bottom: 2px solid #fff; /* Bordure blanche en bas de l'image pour ajouter de la séparation */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
 }
 
-/* Titre du film */
 .movie_title {
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%); /* Centre le titre horizontalement */
-  font-size: 1.2em; /* Ajuste la taille du titre */
-  color: white;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Ombre pour améliorer la lisibilité */
-  opacity: 0; /* Titre invisible par défaut */
-  transition: opacity 0.3s ease; /* Transition pour l'apparition du titre */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  color: #fff;
+  font-size: 1.2em;
+  padding: 1rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Affichage du titre au survol */
-.movie:hover .movie_title {
-  opacity: 1; /* Le titre devient visible au survol */
+.movie:hover .card__title {
+  opacity: 1;
 }
