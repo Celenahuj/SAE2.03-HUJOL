@@ -43,7 +43,7 @@
 
     C.start = function () {
       V.renderLog("Démarrage de l'application");
-      V.renderNewMenu("C.handlerAdd()");
+      V.renderNewMovie("C.handlerAdd()");
 
     };
 
@@ -54,9 +54,9 @@
       content.innerHTML = Log.format(txt);
     };
 
-    V.renderNewMenu = function (handler) {
+    V.renderNewMovie = function (handler) {
       let content = document.querySelector('#addMovie');
-      content.innerHTML = AddMenuForm.format(handler);
+      content.innerHTML = AddMovieForm.format(handler);
     }
 
     C.start();
