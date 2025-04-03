@@ -54,9 +54,9 @@
       content.innerHTML = Log.format(txt);
     };
 
-    V.renderNewMenu = function (txt) {
+    V.renderNewMenu = function (handler) {
       let content = document.querySelector('#addMovie');
-      content.innerHTML = AddMenuForm.format(txt);
+      content.innerHTML = AddMenuForm.format(handler);
     }
 
     C.start();
