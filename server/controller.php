@@ -27,17 +27,15 @@ return $movies;
 }
 
 function addController() {
-    var_dump($_REQUEST); // Vérifier les valeurs envoyées
-    
-    $titre = $_REQUEST['name'] ?? null;
-    $annee = $_REQUEST['year'] ?? null;
-    $duree = $_REQUEST['length'] ?? null;
-    $desc = $_REQUEST['description'] ?? null;
-    $real = $_REQUEST['director'] ?? null;
-    $cat = $_REQUEST['id_category'] ?? null;  // Doit correspondre à une catégorie valide
-    $image = $_REQUEST['image'] ?? null;
-    $url = $_REQUEST['trailer'] ?? null;
-    $rest = $_REQUEST['min_age'] ?? null;
+    $titre = $_REQUEST['name'] ;
+    $annee = $_REQUEST['year'] ;
+    $duree = $_REQUEST['length'] ;
+    $desc = $_REQUEST['description'] ;
+    $real = $_REQUEST['director'];
+    $cat = $_REQUEST['id_category'] ;  // Doit correspondre à une catégorie valide
+    $image = $_REQUEST['image'];
+    $url = $_REQUEST['trailer'] ;
+    $rest = $_REQUEST['min_age'] ;
 
     if (!$titre || !$annee || !$duree || !$desc || !$real || !$cat || !$image || !$url || !$rest) {
         return "Erreur : données manquantes !";
