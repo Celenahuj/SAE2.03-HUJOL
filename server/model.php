@@ -35,11 +35,12 @@ function getMovie()
 }
 
 function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $rest) {
-    
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
             VALUES (:titre, :annee, :duree, :description, :realisateur, :categorie, :image, :url, :restriction)";
     
-    $stmt = $pdo->prepare($sql);
+    $stmt = $cnx->prepare($sql);
+
     $stmt->bindParam(':titre', $titre);
     $stmt->bindParam(':annee', $annee);
     $stmt->bindParam(':duree', $duree);
@@ -49,6 +50,8 @@ function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $res
     $stmt->bindParam(':image', $image);
     $stmt->bindParam(':url', $url);
     $stmt->bindParam(':restriction', $rest);
-    
-    return $stmt->execute();
+
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res ;
 }

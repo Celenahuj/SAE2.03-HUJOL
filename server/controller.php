@@ -27,21 +27,22 @@ return $movies;
 }
 
 function addController() {
-    $titre = $_REQUEST['name'] ;
-    $annee = $_REQUEST['year'] ;
-    $duree = $_REQUEST['length'] ;
-    $desc = $_REQUEST['description'] ;
+    $titre = $_REQUEST['name'];
+    $annee = $_REQUEST['year'];
+    $duree = $_REQUEST['length'];
+    $desc = $_REQUEST['description'];
     $real = $_REQUEST['director'];
-    $cat = $_REQUEST['id_category'] ; 
+    $cat = $_REQUEST['id_category']; 
     $image = $_REQUEST['image'];
-    $url = $_REQUEST['trailer'] ;
-    $rest = $_REQUEST['min_age'] ;
-
-    if (!$titre || !$annee || !$duree || !$desc || !$real || !$cat || !$image || !$url || !$rest) {
-        return "Erreur : données manquantes !";
-    }
+    $url = $_REQUEST['trailer'];
+    $rest = $_REQUEST['min_age'];
 
     $ok = AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $rest);
 
-    return ($ok) ? "Le film a été ajouté" : "Erreur d'ajout";
+    if ($ok != 0){
+        return "Le film a été ajouté";
+    }
+    else {
+        return "Erreur d'ajout";
+    }
 }
