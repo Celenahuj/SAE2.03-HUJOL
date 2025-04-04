@@ -36,17 +36,17 @@
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
       C.getMovie();
-      C.getDetail();
     };
 
     C.getMovie = async function () {
       let data = await DataMovie.requestMovies();
       V.renderMovie(data);
     }
-    C.getDetail = async function () {
-      let data = await DataMovie.requestMovieDetails();
+
+    C.getDetail = async function (id) {
+      let data = await DataMovie.requestMovieDetails(id);
       V.renderDetail(data);
-    }
+    };
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -66,6 +66,13 @@
     V.renderMovie = function (data) {
       let content = document.querySelector("#content");
       content.innerHTML = Movie.format(data);
+
+      document.querySelectorAll(".movie").forEach((element) => {
+        element.onclick = function () {
+          let movieId = this.dataset.id;
+          C.getDetail(movieId);
+        };
+      });
     };
 
     V.renderDetail = function (data) {

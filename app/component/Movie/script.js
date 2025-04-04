@@ -4,11 +4,12 @@ let template = await templateFile.text();
 let Movie = {};
 Movie.format = function (movies) {
   let html = "";
-  movies.forEach((movie)=> {
+  movies.forEach((movie) => {
     let moviehtml = template;
     moviehtml = moviehtml.replace("{{image}}", movie.image);
     moviehtml = moviehtml.replace("{{title}}", movie.name);
-    html+=moviehtml;
+    moviehtml = moviehtml.replace("{{id}}", movie.id_category);
+    html += moviehtml;
   });
   return html;
 };
