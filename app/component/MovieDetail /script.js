@@ -19,4 +19,4 @@ MovieDetail.format = function (movies) {
   return html;
 };
 
-export { Movie };
+export { MovieDetail };

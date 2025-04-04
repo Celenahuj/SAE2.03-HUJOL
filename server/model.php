@@ -34,6 +34,23 @@ function getMovie()
     return $res; // Retourne les résultats
 }
 
+function getDetail()
+{
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le menu avec des paramètres
+    $sql = "SELECT name, image, year, category, description, director, min_age, trailer FROM Movie";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    // Lie le paramètre à la valeur
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+}
+
+
 function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $rest) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 

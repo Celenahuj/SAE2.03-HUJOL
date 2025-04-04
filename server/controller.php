@@ -26,6 +26,13 @@ $movies = getMovie();
 return $movies;
 }
 
+function readdetailController()
+{
+$details = getDetail();
+return $details;
+}
+
+
 function addController() {
     $titre = $_REQUEST['name'];
     $annee = $_REQUEST['year'];

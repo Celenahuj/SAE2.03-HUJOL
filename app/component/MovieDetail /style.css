@@ -1,65 +1,59 @@
-.movies {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 1.25rem; 
-  padding: 1.25rem;
-  justify-items: center;
-  background-color: var(--color-white); 
-  font-family: var(--ff-sans);
-}
-
-.movie {
-  position: relative;
-  width: 100%;
-  max-width: 11.25rem; 
-  border-radius: 0.5rem; 
-  overflow: hidden;
- 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.movie:hover {
-  transform: scale(1.05); 
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7); 
-}
-
-.movie_img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-}
-
-.movie_title {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%; 
-  font-size: 1rem; 
-  font-weight: 600;
-  color: white;
-  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.6); 
-  padding: 2rem 1rem 0 1rem ;
-  margin: 0;
-  background: linear-gradient(to top, rgb(0, 0, 0), rgba(44, 44, 44, 0));
-  box-sizing: border-box;
-  height: 30%; 
+.moviedetail {
   display: flex;
-  align-items: flex-top; 
+  gap: 20px;
+  align-items: flex-start;
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 100%;
 }
 
-.movie__title-text {
-  z-index: 1; 
+/* Image de l'affiche */
+.movie__image {
+  width: 250px;
+  height: 250px;
+  background-color: #e0e0e0;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
-
-@media (min-width: 768px) {
-  .movies {
-    grid-template-columns: repeat(4, 1fr);
-  }
+/* Informations du film */
+figcaption {
+  flex: 1;
 }
 
-@media (min-width: 1024px) {
-  .movies {
-    grid-template-columns: repeat(5, 1fr); 
-  }
+figcaption h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+figcaption p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Bande-annonce */
+.movie__video {
+  width: 100%;
+  max-width: 900px;
+  height: 250px;
+  margin-top: 20px;
+  border: none;
+  background-color: #e0e0e0;
+}
+.movie__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Bande-annonce */
+.movie__video {
+  width: 100%;
+  height: 250px;
+  margin-top: 20px;
+  border: none;
+  background-color: #e0e0e0;
 }
