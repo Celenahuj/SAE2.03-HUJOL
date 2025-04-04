@@ -35,7 +35,6 @@ function getMovie()
 }
 
 function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $rest) {
-    global $pdo;
     
     $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
             VALUES (:titre, :annee, :duree, :description, :realisateur, :categorie, :image, :url, :restriction)";

@@ -32,7 +32,7 @@ function addController() {
     $duree = $_REQUEST['length'] ;
     $desc = $_REQUEST['description'] ;
     $real = $_REQUEST['director'];
-    $cat = $_REQUEST['id_category'] ;  // Doit correspondre à une catégorie valide
+    $cat = $_REQUEST['id_category'] ; 
     $image = $_REQUEST['image'];
     $url = $_REQUEST['trailer'] ;
     $rest = $_REQUEST['min_age'] ;
