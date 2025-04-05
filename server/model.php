@@ -34,20 +34,18 @@ function getMovie()
     return $res; // Retourne les résultats
 }
 
-function getDetail()
+function getDetail($id)
 {
-    // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "SELECT name, image, year, category, description, director, min_age, trailer FROM Movie";
-    // Prépare la requête SQL
+    $sql = "SELECT Movie.*, Category.name AS category
+            FROM Movie
+            JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.id = :id";
     $stmt = $cnx->prepare($sql);
-    // Lie le paramètre à la valeur
-    // Exécute la requête SQL
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
-    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    $res = $stmt->fetch(PDO::FETCH_OBJ); // un seul film
+    return $res;
 }
 
 

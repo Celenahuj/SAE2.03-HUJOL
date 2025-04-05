@@ -9,7 +9,7 @@ DataMovie.requestMovies = async function () {
 }
 
 DataMovie.requestMovieDetails = async function (id) {
-    let response = await fetch(HOST_URL + "/server/script.php?todo=details&id=${id}");
+    let response = await fetch(`${HOST_URL}/server/script.php?todo=details&id=${id}`);
     return await response.json();
 };
 export { DataMovie };

@@ -25,13 +25,14 @@ function readmoviesController()
 $movies = getMovie();
 return $movies;
 }
-
 function readdetailController()
 {
-$details = getDetail();
-return $details;
+    $id = $_REQUEST['id'] ?? null;
+    if (empty($id)) {
+        return false;
+    }
+    return getDetail($id);
 }
-
 
 function addController() {
     $titre = $_REQUEST['name'];

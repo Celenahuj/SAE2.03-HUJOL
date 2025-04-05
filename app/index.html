@@ -12,8 +12,7 @@
   <header id="header"></header>
 
   <section class="movies" id="content"></section>
-
-  <section class="details" id="details"></section>
+  <section class="details" id="details" style="display: none;"></section>
 
   <script type="module">
     import { NavBar } from "./component/NavBar/script.js";
@@ -66,6 +65,8 @@
     V.renderMovie = function (data) {
       let content = document.querySelector("#content");
       content.innerHTML = Movie.format(data);
+      document.querySelector("#content").style.display = "block";
+      document.querySelector("#details").style.display = "none";
 
       document.querySelectorAll(".movie").forEach((element) => {
         element.onclick = function () {
@@ -76,8 +77,10 @@
     };
 
     V.renderDetail = function (data) {
-      let content = document.querySelector("#details");
-      content.innerHTML = MovieDetail.format(data);
+      let details = document.querySelector("#details");
+      details.innerHTML = MovieDetail.format(data);
+      document.querySelector("#content").style.display = "none";
+      document.querySelector("#details").style.display = "block";
     };
 
     C.start(); 
