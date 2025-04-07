@@ -24,6 +24,8 @@
  */
 require("controller.php");
 
+
+
 /**
  * Vérifie si la variable 'todo' est définie dans la requête.
  * 
@@ -58,6 +60,10 @@ if ( isset($_REQUEST['todo']) ){
 
     case 'addMovie':
       $data = addController();
+      break;
+
+    case 'addprofil':
+      $data = addprofilController();
       break;
     
     case 'details':

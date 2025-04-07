@@ -1,0 +1,48 @@
+.addProfil {
+  width: 350px;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.addProfil__title {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  margin: -20px -20px 20px -20px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.addProfil__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.addProfil__form input,
+.addProfil__form select,
+.addProfil__form textarea {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.addProfil__form input[type="button"] {
+  background: black;
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.addProfil__form input[type="button"]:hover {
+  background: #333;
+}

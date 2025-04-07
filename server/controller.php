@@ -67,3 +67,23 @@ function addController() {
         return "Erreur d'ajout";
     }
 }
+
+function addprofilController() {
+    $name = $_REQUEST['name'];
+    $image = $_REQUEST['image'];
+    $rest = $_REQUEST['min_age'];
+
+    if (empty($name) || empty($image) || empty($rest)) {
+        return "Erreur : Tous les champs doivent être remplis.";
+    }
+
+    $ok = AddProfilMovie($name, $image, $rest);
+
+    if ($ok != 0){
+        return "Le profil a été ajouté";
+    }
+    else {
+        return "Erreur d'ajout";
+    }
+}
+
