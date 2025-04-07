@@ -11,13 +11,16 @@
 <body>
   <header id="header"></header>
 
+  <section class="categories" id="categories"></section>
   <section class="movies" id="content"></section>
   <section class="details" id="details"></section>
+  
 
   <script type="module">
     import { NavBar } from "./component/NavBar/script.js";
     import { Movie } from "./component/Movie/script.js";
     import { MovieDetail } from "./component/MovieDetail/script.js";
+    import { Moviecategory } from "./component/MovieCategory/script.js";
     import { DataMovie } from "./data/dataMovie.js";
 
     // Controleur
@@ -26,18 +29,19 @@
     window.C = {};
 
     C.handlerAbout = function () {
-      alert(
-        "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-      );
+      C.getMovie();
     };
 
 
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
+      V.renderMovieCategorie();
       C.getMovie();
     };
 
     C.getMovie = async function () {
+      let infos = document.querySelector('#content');
+      infos.innerHTML = "";
       let data = await DataMovie.requestMovies();
       V.renderMovie(data);
     }
@@ -47,6 +51,13 @@
       V.renderDetail(data);
     };
 
+    C.handlerCategorie = async function (categorie) {
+        console.log("Catégorie sélectionnée :", categorie);
+        let data = await DataMovie.requestMoviecategorie(categorie);
+        V.renderMovie(data);
+      };
+
+  
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
@@ -76,10 +87,7 @@
     V.renderDetail = function (data) {
       let details = document.querySelector("#details");
       details.innerHTML = MovieDetail.format(data);
-      // document.querySelector("#content").style.display = "none";
-      // document.querySelector("#details").style.display = "block";
       document.querySelector("#details").classList.add('open');
-
     };
 
 
@@ -94,6 +102,22 @@
       }
     });
     
+    V.renderCategory = async function () {
+      let categories = document.querySelector("#categories");
+      let data = await DataMovie.requestMoviecategorie();
+      categories.innerHTML = Moviecategory.format(data);
+      console.log("test")
+
+    };
+    V.renderMovieCategorie = async function () {
+        let container = document.querySelector(".categories");
+        let categories = await DataMovie.requestCategories();
+        container.innerHTML = Moviecategory.format(categories);
+        console.log("test")
+
+      };
+
+
     C.start(); 
   </script>
 </body>
