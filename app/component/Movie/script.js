@@ -8,7 +8,7 @@ Movie.format = function (movies) {
     let moviehtml = template;
     moviehtml = moviehtml.replace("{{image}}", movie.image);
     moviehtml = moviehtml.replace("{{title}}", movie.name);
-    moviehtml = moviehtml.replace("{{id}}", movie.id_category);
+    moviehtml = moviehtml.replace("{{id}}", movie.id);
     html += moviehtml;
   });
   return html;
