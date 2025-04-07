@@ -48,6 +48,29 @@ function getDetail($id)
     return $res;
 }
 
+function getMovieCategories($category){
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, image
+            FROM Movie
+            JOIN Category ON Movie.id_category = Category.id
+            WHERE LOWER(Category.name) = LOWER(:category)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':category', $category, PDO::PARAM_STR); 
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+
+function getAllCategories() {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer les noms de toutes les catégories
+    $sql = "SELECT name FROM Category";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
 
 function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $rest) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);

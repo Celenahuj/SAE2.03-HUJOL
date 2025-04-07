@@ -34,6 +34,19 @@ function readdetailController()
     return getDetail($id);
 }
 
+function readMovieCategorie()
+{
+    $category = $_REQUEST['category'] ?? null;
+    if (empty($category)) {
+        return false;
+    }
+    return getMovieCategories($category);
+}
+
+function readAllCategories() {
+    return getAllCategories();
+  }
+
 function addController() {
     $titre = $_REQUEST['name'];
     $annee = $_REQUEST['year'];
