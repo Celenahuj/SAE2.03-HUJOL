@@ -23,7 +23,7 @@ function getMovie()
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "select name, image, id from Movie";
+    $sql = "select name, image, id from Movie where ";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
     // Lie le paramètre à la valeur
@@ -32,6 +32,29 @@ function getMovie()
     // Récupère les résultats de la requête sous forme d'objets
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
+}
+
+function getMovieByAge($age)
+{
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    // Requête SQL pour récupérer les films filtrés par âge
+    $sql = "SELECT name, image, id FROM Movie WHERE min_age >= :age";
+
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    // Lie le paramètre d'âge à la valeur de la requête
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+
+    // Exécute la requête SQL
+    $stmt->execute();
+
+    // Récupère les résultats sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    return $res; // Retourne les films filtrés
 }
 
 function getDetail($id)
@@ -109,6 +132,13 @@ function AddProfilMovie($name, $image, $rest) {
         $stmt->execute();
         $res = $stmt->rowCount();
         return $res;
+}
 
-    
+function getProfils() {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id_profil, name, image, year FROM Profil";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
 }

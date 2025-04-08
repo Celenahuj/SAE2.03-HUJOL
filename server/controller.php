@@ -22,9 +22,22 @@ require("model.php");
 
 function readmoviesController()
 {
-$movies = getMovie();
-return $movies;
+    $age = $_REQUEST['age'] ?? null;
+
+    // Si un âge minimum est spécifié, on passe l'âge en paramètre à la fonction du modèle
+    if ($age !== null) {
+        $movies = getMovieByAge($age);
+    } else {
+        // Sinon, on récupère tous les films sans filtrage
+        $movies = getMovie();
+    }
+    return $movies;
 }
+
+function readProfilsController() {
+    return getProfils();
+}
+
 function readdetailController()
 {
     $id = $_REQUEST['id'] ?? null;

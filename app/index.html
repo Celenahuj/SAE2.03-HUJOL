@@ -14,7 +14,7 @@
   <section class="categories" id="categories"></section>
   <section class="movies" id="content"></section>
   <section class="details" id="details"></section>
-  
+
 
   <script type="module">
     import { NavBar } from "./component/NavBar/script.js";
@@ -22,6 +22,7 @@
     import { MovieDetail } from "./component/MovieDetail/script.js";
     import { Moviecategory } from "./component/MovieCategory/script.js";
     import { DataMovie } from "./data/dataMovie.js";
+    import { DataProfile } from "./data/dataProfile.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -42,9 +43,16 @@
     C.getMovie = async function () {
       let infos = document.querySelector('#content');
       infos.innerHTML = "";
-      let data = await DataMovie.requestMovies();
+
+      
+      // Récupérer l'âge du profil sélectionné, ou utiliser 0 si aucun profil n'est sélectionné
+      let profil = await DataProfile.read();
+      let age = profil && profil.age ? profil.age : 0;
+
+      // Appel de la fonction requestMovies avec l'âge
+      let data = await DataMovie.requestMovies(age);
       V.renderMovie(data);
-    }
+    };
 
     C.getDetail = async function (id) {
       let data = await DataMovie.requestMovieDetails(id);
@@ -52,12 +60,12 @@
     };
 
     C.handlerCategorie = async function (categorie) {
-        console.log("Catégorie sélectionnée :", categorie);
-        let data = await DataMovie.requestMoviecategorie(categorie);
-        V.renderMovie(data);
-      };
+      console.log("Catégorie sélectionnée :", categorie);
+      let data = await DataMovie.requestMoviecategorie(categorie);
+      V.renderMovie(data);
+    };
 
-  
+
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
@@ -101,7 +109,7 @@
         detail.classList.remove('open');
       }
     });
-    
+
     V.renderCategory = async function () {
       let categories = document.querySelector("#categories");
       let data = await DataMovie.requestMoviecategorie();
@@ -110,13 +118,17 @@
 
     };
     V.renderMovieCategorie = async function () {
-        let container = document.querySelector(".categories");
-        let categories = await DataMovie.requestCategories();
-        container.innerHTML = Moviecategory.format(categories);
-        console.log("test")
+      let container = document.querySelector(".categories");
+      let categories = await DataMovie.requestCategories();
+      container.innerHTML = Moviecategory.format(categories);
+      console.log("test")
+    };
 
-      };
-
+    V.renderNavBar = async function (hAbout) {
+      let header = document.querySelector("#header");
+      let profils = await DataProfile.read();
+      header.innerHTML = NavBar.format(hAbout, profils);
+    };
 
     C.start(); 
   </script>

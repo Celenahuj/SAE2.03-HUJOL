@@ -1,21 +1,63 @@
 .navbar {
+  background-color: #333;
+  padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Aligne les éléments à gauche et à droite */
   align-items: center;
-  padding: 1rem 3rem;
-  color: var(--color-fg);
-  background-color: var(--color-bg);
+  border-radius: 5px;
+}
 
-  .navbar__item {
-    --_offset: 0.2rem;
-    padding: 0.5rem 1rem;
-    text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-    text-underline-offset: var(--_offset);
-    cursor: pointer;
-    transition: text-underline-offset 0.2s ease-in-out;
-    &:hover {
-      --_offset: 0.5rem;
-    }
-  }
+/* Liste de la navigation */
+.navbar__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Item de la liste de navigation (Accueil) */
+.navbar__item {
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* Effet au survol de l'item "Accueil" */
+.navbar__item:hover {
+  background-color: #444;
+}
+
+/* Menu déroulant pour sélectionner un profil */
+.navbar__options {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  margin-left: 20px; /* Espacement à gauche entre "Accueil" et le menu déroulant */
+  transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du menu déroulant */
+.navbar__options:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styles pour les options du menu déroulant */
+.navbar__options option {
+  padding: 10px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Effet au survol des options du menu déroulant */
+.navbar__options option:hover {
+  background-color: #f1f1f1;
 }
