@@ -97,7 +97,7 @@ function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $res
 function AddProfilMovie($name, $image, $rest) {
     
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO Profil (name, image, min_age) 
+        $sql = "INSERT INTO Profil (name, image, year) 
                 VALUES (:name, :image, :rest)";
         
         $stmt = $cnx->prepare($sql);

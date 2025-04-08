@@ -52,11 +52,6 @@
       V.renderLog(res);
     }
 
-    V.renderProfil = function (handler) {
-      let content = document.querySelector('#addprofilMovie');
-      content.innerHTML = AddProfilForm.format(handler);
-    }
-
     C.start = function () {
       V.renderLog("Démarrage de l'application");
       V.renderNewMovie("C.handlerAdd()");
@@ -76,6 +71,11 @@
       content.innerHTML = AddMovieForm.format(handler);
     }
 
+    V.renderProfil = function (handler) {
+      let content = document.querySelector('#addprofilMovie');
+      content.innerHTML = AddProfilForm.format(handler);
+    }
+    
     C.start();
   </script>
 </body>
