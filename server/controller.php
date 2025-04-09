@@ -62,7 +62,12 @@ function readMovieCategorie()
     if (empty($category)) {
         return false;
     }
-    return getMovieCategories($category);
+
+    $age = $_REQUEST['age'] ?? null;
+    if ( $age == null)
+        return getMovieCategories($category);
+    else
+        return getMovieCategoriesByAge($category, $age);
 }
 
 function readAllCategories() {

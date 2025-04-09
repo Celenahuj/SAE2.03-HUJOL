@@ -32,7 +32,7 @@
     C.profil = null;
 
     C.handlerAbout = function () {
-      C.getMovie();
+      C.getMovie(C.profil.age);
     };
 
 
@@ -55,15 +55,15 @@
       return age;
     }
 
-    C.getMovie = async function () {
+    C.getMovie = async function (age) {
       let infos = document.querySelector('#content');
       infos.innerHTML = "";
 
-      if (!C.profil || !C.profil.year) {
+      if (C.profil==null) {
         infos.innerHTML = "<p>Veuillez sélectionner un profil pour voir les films accessibles.</p>";
         return; // Arrêter la fonction si aucun profil n'est sélectionné
       }
-      let data = await DataMovie.requestMovies(); // ne pas encore filtrer ici
+      let data = await DataMovie.requestMovies(age); // ne pas encore filtrer ici
       // On filtre les films accessibles à l'âge de l'utilisateur
       let filmsVisibles = data.filter(film => {
         // Exemple : si chaque film a un champ film.ageMinimum (ou ageLimit)
@@ -85,7 +85,7 @@
 
     C.handlerCategorie = async function (categorie) {
       console.log("Catégorie sélectionnée :", categorie);
-      let data = await DataMovie.requestMoviecategorie(categorie);
+      let data = await DataMovie.requestMoviecategorie(categorie, C.profil.age);
       V.renderMovie(data);
     };
 

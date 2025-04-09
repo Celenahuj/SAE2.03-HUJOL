@@ -7,7 +7,7 @@ Moviecategory.format = function (categories) {
   let listHTML = categories
     .map(
       (cat) =>
-        `<li class="categorie__tag" onclick="C.handlerCategorie('${cat.name}')">${cat.name}</li>`
+        `<li class="categorie__tag" onclick="C.handlerCategorie('${cat.id}')">${cat.name}</li>`
     )
     .join("");
 

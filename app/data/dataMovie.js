@@ -28,11 +28,16 @@ DataMovie.requestCategories = async function () {
     return categories;
   };
   
-  DataMovie.requestMoviecategorie = async function (categorie) {
+  DataMovie.requestMoviecategorie = async function (categorie, age=undefined) {
+
+    let params = "todo=getMovieCategorie&category=" + categorie;
+
+    if (age!=undefined)
+      params += "&age="+age;
+
     let answer = await fetch(
       HOST_URL +
-        "/server/script.php?todo=getMovieCategorie&category=" +
-        categorie
+        "/server/script.php?" + params
     );
     let movie = await answer.json();
     return movie;

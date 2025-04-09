@@ -7,9 +7,12 @@ NavBar.format = function (hAbout, profiles = []) {
   let html = template;
   html = html.replace("{{hAbout}}", hAbout);
 
-  let profilsHtml = profiles.map(p => 
-    `<option class="navbar__item" value="${p.id_profil}">${p.name}</option>`
-  ).join("");
+
+  let  profilsHtml = "";
+
+  for (let p of profiles){
+     profilsHtml +=  `<option class="navbar__item" value="${p.id_profil}">${p.name}</option>`;
+  }
 
   html = html.replace("{{profilsList}}", profilsHtml);
 

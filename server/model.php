@@ -75,20 +75,33 @@ function getMovieCategories($category){
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name, image
             FROM Movie
-            JOIN Category ON Movie.id_category = Category.id
-            WHERE LOWER(Category.name) = LOWER(:category)";
+            WHERE Movie.id_category = :category";
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':category', $category, PDO::PARAM_STR); 
+    $stmt->bindParam(':category', $category, PDO::PARAM_INT); 
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
 
+function getMovieCategoriesByAge($category, $age){
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, image
+            FROM Movie
+            WHERE Movie.id_category = :category and min_age <= :age";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':category', $category, PDO::PARAM_INT); 
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT); 
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
+
+
 function getAllCategories() {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer les noms de toutes les catégories
-    $sql = "SELECT name FROM Category";
+    $sql = "SELECT id, name FROM Category";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
