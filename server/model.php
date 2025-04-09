@@ -131,20 +131,41 @@ function AddMovie($titre, $annee, $duree, $desc, $real, $cat, $image, $url, $res
 }
 
 function AddProfilMovie($name, $image, $rest) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    // Vérifier si un profil avec le même nom existe déjà
+    $sql_check = "SELECT id_profil FROM Profil WHERE name = :name";
+    $stmt_check = $cnx->prepare($sql_check);
+    $stmt_check->bindParam(':name', $name);
+    $stmt_check->execute();
     
-        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO Profil (name, image, year) 
-                VALUES (:name, :image, :rest)";
-        
-        $stmt = $cnx->prepare($sql);
+    $id_profil = $stmt_check->fetchColumn();
 
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':image', $image);
-        $stmt->bindParam(':rest', $rest);
+    // Si le profil existe déjà, on le met à jour
+    if ($id_profil) {
+        $sql_update = "UPDATE Profil SET image = :image, year = :rest WHERE id_profil = :id";
+        $stmt_update = $cnx->prepare($sql_update);
+        $stmt_update->bindParam(':image', $image);
+        $stmt_update->bindParam(':rest', $rest);
+        $stmt_update->bindParam(':id', $id_profil);
+        $stmt_update->execute();
 
-        $stmt->execute();
-        $res = $stmt->rowCount();
-        return $res;
+        return 1; // Profil mis à jour
+    }
+
+    // Si le profil n'existe pas, on l'ajoute
+    $sql_insert = "INSERT INTO Profil (name, image, year) VALUES (:name, :image, :rest)";
+    $stmt_insert = $cnx->prepare($sql_insert);
+
+    $stmt_insert->bindParam(':name', $name);
+    $stmt_insert->bindParam(':image', $image);
+    $stmt_insert->bindParam(':rest', $rest);
+
+    $stmt_insert->execute();
+    $res = $stmt_insert->rowCount(); 
+
+    return $res;
 }
 
 function getProfils() {

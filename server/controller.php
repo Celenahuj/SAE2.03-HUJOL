@@ -106,10 +106,11 @@ function addprofilController() {
 
     $ok = AddProfilMovie($name, $image, $rest);
 
-    if ($ok != 0){
+    if ($ok == 1) {
+        return "Le profil a été mis à jour";
+    } elseif ($ok != 0) {
         return "Le profil a été ajouté";
-    }
-    else {
+    } else {
         return "Erreur d'ajout";
     }
 }
