@@ -115,3 +115,20 @@ function addprofilController() {
     }
 }
 
+function addFavoriController() {
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+    $id_film = $_REQUEST['id'] ?? null;
+
+    if (!$id_profil || !$id_film) return "Erreur : infos manquantes";
+
+    $ok = addFavori($id_profil, $id_film);
+    return $ok ? "Film ajouté aux favoris !" : "Déjà dans les favoris.";
+}
+
+function getFavorisController() {
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+
+    if (!$id_profil) return "Erreur : profil manquant";
+
+    return getFavorisByProfil($id_profil);
+}

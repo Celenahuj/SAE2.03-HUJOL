@@ -59,7 +59,7 @@
       let infos = document.querySelector('#content');
       infos.innerHTML = "";
 
-      if (C.profil==null) {
+      if (C.profil == null) {
         infos.innerHTML = "<p>Veuillez sélectionner un profil pour voir les films accessibles.</p>";
         return; // Arrêter la fonction si aucun profil n'est sélectionné
       }
@@ -78,7 +78,7 @@
       V.renderMovie(filmsVisibles);
     };
 
-    C.getDetail = async function (id) {
+    C.handlerDetail = async function (id) {
       let data = await DataMovie.requestMovieDetails(id);
       V.renderDetail(data);
     };
@@ -98,6 +98,25 @@
       C.profil.age = calculerAge(C.profil.year);
       C.getMovie(C.profil.age);
     }
+
+
+    C.handlerFavoris = async function () {
+      if (!C.profil) {
+        alert("Choisis un profil avant.");
+        return;
+      }
+      console.log(C.profil.id_profil)
+      let data = await DataProfile.getFavoris(C.profil.id_profil);
+      V.renderMovie(data); // Réutilise l’affichage normal
+    };
+
+
+    C.handlerAddFavoris = async function (id) {
+      console.log(id)
+      let data = await DataProfile.addFavori(id, C.profil.id_profil);
+     // V.renderMovie(data); 
+    };
+
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -119,19 +138,29 @@
       content.innerHTML = (!data || data.length === 0)
         ? "<p>Aucun film disponible pour le moment.</p>"
         : Movie.format(data);
+        /*
       document.querySelectorAll(".movie").forEach((element) => {
         element.onclick = function () {
           let movieId = this.dataset.id;
           C.getDetail(movieId);
         };
-      });
+
+
+        element.querySelector('.add-fav').onclick = async (e) => {
+          e.stopPropagation();
+          if (!C.profil) {
+            alert("Choisis un profil d'abord !");
+            return;
+          }
+        };
+      });*/
     };
 
 
     V.renderDetail = function (data) {
       let details = document.querySelector("#details");
       details.innerHTML = MovieDetail.format(data);
-      document.querySelector("#details").classList.add('open');
+      details.classList.add('open');
     };
 
 

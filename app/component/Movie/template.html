@@ -1,6 +1,9 @@
-<figure class="movie" data-id="{{id}}">
-  <figcaption>
-    <h1 class="movie_title">{{title}}</h1>
-  </figcaption>
-  <img src="https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL/server/images/{{image}}" alt="affiche" class="movie__img" />
-</figure>
+<div class="movie">
+  <figure  onclick="C.handlerDetail({{id}})">
+    <figcaption>
+      <h1 class="movie_title">{{title}}</h1>
+    </figcaption>
+    <img src="https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL/server/images/{{image}}" alt="affiche" class="movie__img" />
+  </figure>
+  <button class="add-fav" onclick="C.handlerAddFavoris({{id}})">Ajouter aux favoris</button>
+</div>
