@@ -8,7 +8,7 @@ NavBar.format = function (hAbout, profiles = []) {
   html = html.replace("{{hAbout}}", hAbout);
 
   let profilsHtml = profiles.map(p => 
-    `<option class="navbar__item" onclick="C.selectProfil(${p.id})">${p.name}</option>`
+    `<option class="navbar__item" value="${p.id_profil}">${p.name}</option>`
   ).join("");
 
   html = html.replace("{{profilsList}}", profilsHtml);

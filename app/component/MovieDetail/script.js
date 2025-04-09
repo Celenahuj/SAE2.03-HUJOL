@@ -9,7 +9,7 @@ MovieDetail.format = function (movie) {
   moviehtml = moviehtml.replace("{{description}}", movie.description);
   moviehtml = moviehtml.replace("{{director}}", movie.director);
   moviehtml = moviehtml.replace("{{year}}", movie.year);
-  moviehtml = moviehtml.replace("{{category}}", movie.id_category);
+  moviehtml = moviehtml.replace("{{category}}", movie.category);
   moviehtml = moviehtml.replace("{{min_age}}", movie.min_age);
   moviehtml = moviehtml.replace("{{trailer}}", movie.trailer);
   return moviehtml;

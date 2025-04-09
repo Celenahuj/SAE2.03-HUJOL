@@ -38,6 +38,15 @@ function readProfilsController() {
     return getProfils();
 }
 
+function readProfilController() {
+    $id = $_REQUEST['id'] ?? null;
+    if ($id === null) {
+        return false; // ou retourne un message d'erreur explicite
+    }
+
+    return getProfil($id);
+}
+
 function readdetailController()
 {
     $id = $_REQUEST['id'] ?? null;
@@ -84,7 +93,7 @@ function addController() {
 function addprofilController() {
     $name = $_REQUEST['name'];
     $image = $_REQUEST['image'];
-    $rest = $_REQUEST['min_age'];
+    $rest = $_REQUEST['year'];
 
     if (empty($name) || empty($image) || empty($rest)) {
         return "Erreur : Tous les champs doivent être remplis.";

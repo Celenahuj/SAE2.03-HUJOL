@@ -17,7 +17,7 @@ DataMovie.addprofil = async function (fdata) {
         method: "POST",
         body: fdata,
     };
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=addProfil", config);
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=addprofil", config);
     let data = await answer.json();
     return data;
 }

@@ -29,6 +29,8 @@
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
 
+    C.profil = null;
+
     C.handlerAbout = function () {
       C.getMovie();
     };
@@ -37,21 +39,43 @@
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
       V.renderMovieCategorie();
+      /*
       C.getMovie();
+      */
     };
+
+    function calculerAge(dateNaissance) {
+      const dateNaissanceObj = new Date(dateNaissance);
+      const today = new Date();
+      let age = today.getFullYear() - dateNaissanceObj.getFullYear();
+      const monthDifference = today.getMonth() - dateNaissanceObj.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dateNaissanceObj.getDate())) {
+        age--;
+      }
+      return age;
+    }
 
     C.getMovie = async function () {
       let infos = document.querySelector('#content');
       infos.innerHTML = "";
 
-      
-      // Récupérer l'âge du profil sélectionné, ou utiliser 0 si aucun profil n'est sélectionné
-      let profil = await DataProfile.read();
-      let age = profil && profil.age ? profil.age : 0;
+      if (!C.profil || !C.profil.year) {
+        infos.innerHTML = "<p>Veuillez sélectionner un profil pour voir les films accessibles.</p>";
+        return; // Arrêter la fonction si aucun profil n'est sélectionné
+      }
+      let data = await DataMovie.requestMovies(); // ne pas encore filtrer ici
+      // On filtre les films accessibles à l'âge de l'utilisateur
+      let filmsVisibles = data.filter(film => {
+        // Exemple : si chaque film a un champ film.ageMinimum (ou ageLimit)
+        return !film.min_age || age >= film.min_age;
+      });
 
-      // Appel de la fonction requestMovies avec l'âge
-      let data = await DataMovie.requestMovies(age);
-      V.renderMovie(data);
+      if (filmsVisibles.length === 0) {
+        infos.innerHTML = "<p>Aucun film n'est accessible pour votre âge.</p>";
+        return;
+      }
+
+      V.renderMovie(filmsVisibles);
     };
 
     C.getDetail = async function (id) {
@@ -65,6 +89,15 @@
       V.renderMovie(data);
     };
 
+    C.handlerChangeProfile = async function () {
+      let option = document.querySelector(".navbar__options");
+      console.log(option.value);
+      let data = await DataProfile.readOne(option.value);
+      console.log(data);
+      C.profil = data;
+      C.profil.age = calculerAge(C.profil.year);
+      C.getMovie(C.profil.age);
+    }
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -83,7 +116,9 @@
 
     V.renderMovie = function (data) {
       let content = document.querySelector("#content");
-      content.innerHTML = Movie.format(data);
+      content.innerHTML = (!data || data.length === 0)
+        ? "<p>Aucun film disponible pour le moment.</p>"
+        : Movie.format(data);
       document.querySelectorAll(".movie").forEach((element) => {
         element.onclick = function () {
           let movieId = this.dataset.id;
@@ -91,6 +126,7 @@
         };
       });
     };
+
 
     V.renderDetail = function (data) {
       let details = document.querySelector("#details");
@@ -126,7 +162,7 @@
 
     V.renderNavBar = async function (hAbout) {
       let header = document.querySelector("#header");
-      let profils = await DataProfile.read();
+      let profils = await DataProfile.readAll();
       header.innerHTML = NavBar.format(hAbout, profils);
     };
 
