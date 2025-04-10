@@ -110,6 +110,30 @@
   fill: red;  /* Cœur rouge quand c'est dans les favoris */
   stroke: red;  /* Le contour reste noir */
 }
+
+
+.remove-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: fill 0.3s ease; 
+}
+
+.remove-fav svg path {
+  fill: red;  /* Cœur vide par défaut (pas de remplissage) */
+  stroke: red;  /* Contour noir du cœur */
+}
+
+.remove-fav.removed svg path {
+  fill: nome ; /* Cœur rouge quand c'est dans les favoris */
+  stroke: black;  /* Le contour reste noir */
+}
+
+
 /* Responsive layout */
 @media (min-width: 600px) {
   .movies {

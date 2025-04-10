@@ -76,7 +76,7 @@
         return;
       }
 
-      V.renderMovie(filmsVisibles);
+      V.renderMovie(filmsVisibles, true);
     };
 
     C.handlerDetail = async function (id) {
@@ -87,7 +87,7 @@
     C.handlerCategorie = async function (categorie) {
       console.log("Catégorie sélectionnée :", categorie);
       let data = await DataMovie.requestMoviecategorie(categorie, C.profil.age);
-      V.renderMovie(data);
+      V.renderMovie(data, true);
     };
 
     C.handlerChangeProfile = async function () {
@@ -108,7 +108,7 @@
       }
       console.log(C.profil.id_profil)
       let data = await DataProfile.getFavoris(C.profil.id_profil);
-      V.renderMovie(data); // Réutilise l’affichage normal
+      V.renderMovie(data, false); // Réutilise l’affichage normal
     };
 
 
@@ -134,6 +134,32 @@
     };
 
 
+    C.handlerRemoveFavoris = async function (id, bouton) {
+      console.log(id)
+      let data = await DataProfile.removeFavori(id, C.profil.id_profil);
+      /*
+      let icone = bouton.querySelector("i");
+
+      // Vérifie si le bouton a la classe "favorited"
+      if (bouton.classList.contains("removed")) {
+        // Retirer du favoris
+        bouton.classList.remove("removed");
+        icone.textContent = "♡";  // Cœur vide
+        icone.style.color = "black";  // Cœur noir
+        console.log("Retiré des favoris : " + id);
+      } else {
+        // Ajouter aux favoris
+        bouton.classList.add("removed");
+        icone.textContent = "♥";  // Cœur plein
+        icone.style.color = "red";  // Cœur rouge
+        console.log("Ajouté aux favoris : " + id);
+        
+      }*/
+      C.handlerFavoris();
+    };
+
+
+
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
@@ -149,27 +175,11 @@
       header.innerHTML = NavBar.format(hAbout);
     };
 
-    V.renderMovie = function (data) {
+    V.renderMovie = function (data, add=true) {
       let content = document.querySelector("#content");
       content.innerHTML = (!data || data.length === 0)
         ? "<p>Aucun film disponible pour le moment.</p>"
-        : Movie.format(data);
-      /*
-    document.querySelectorAll(".movie").forEach((element) => {
-      element.onclick = function () {
-        let movieId = this.dataset.id;
-        C.getDetail(movieId);
-      };
-
-
-      element.querySelector('.add-fav').onclick = async (e) => {
-        e.stopPropagation();
-        if (!C.profil) {
-          alert("Choisis un profil d'abord !");
-          return;
-        }
-      };
-    });*/
+        : Movie.format(data, add);
     };
 
 

@@ -132,3 +132,14 @@ function getFavorisController() {
 
     return getFavorisByProfil($id_profil);
 }
+
+
+function removeFavoriController() {
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+    $id_film = $_REQUEST['id'] ?? null;
+
+    if (!$id_profil || !$id_film) return "Erreur : infos manquantes";
+
+    $ok = removeFavori($id_profil, $id_film);
+    return $ok ? "Film supprimé des favoris !": "Le film n'était pas dans les favoris.";
+}

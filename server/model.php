@@ -196,6 +196,15 @@ function addFavori($id_profil, $id_film) {
     return $stmt->execute();
 }
 
+function removeFavori($id_profil, $id_film) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "DELETE FROM Favori WHERE id_profil = :id_profil AND id = :id_film";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profil', $id_profil);
+    $stmt->bindParam(':id_film', $id_film);
+    return $stmt->execute();
+}
+
 function getFavorisByProfil($id_profil) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name, Movie.image
