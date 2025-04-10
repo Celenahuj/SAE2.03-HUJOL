@@ -1,8 +1,8 @@
 .movies {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem; /* réduit l'espacement entre les films */
-  padding: 0.25rem; /* réduit les marges internes */
+  gap: 1rem;
+  padding: 0.5rem;
   justify-items: center;
   background-color: var(--color-white);
   font-family: var(--ff-sans);
@@ -11,21 +11,32 @@
 .movie {
   position: relative;
   width: 100%;
-  max-width: none; /* évite les contraintes de largeur */
+  max-width: 20rem;
+  /* limite la taille des cartes */
   border-radius: 0.5rem;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
 }
 
 .movie:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+  transform: scale(1.03);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
+}
+
+.movie figure {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 .movie__img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .movie_title {
@@ -36,50 +47,70 @@
   font-size: 1rem;
   font-weight: 600;
   color: white;
-  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.6);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   padding: 0.5rem 1rem;
   margin: 0;
-  background: linear-gradient(to top, rgb(0, 0, 0), rgba(44, 44, 44, 0));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   box-sizing: border-box;
-  height: 25%;
   display: flex;
   align-items: flex-end;
 }
 
-/* Style pour le bouton "Ajouter aux favoris" */
+/*
 .add-fav {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: rgba(255, 0, 0, 0.7);
+  background-color: rgba(255, 0, 0, 0.8);
   color: white;
   border: none;
   padding: 0.5rem;
   border-radius: 50%;
   cursor: pointer;
   font-size: 1.25rem;
+  z-index: 2;
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .add-fav:hover {
-  background-color: rgba(255, 0, 0, 1); /* rouge vif au survol */
-  transform: scale(1.1); /* léger zoom du bouton */
+  background-color: rgba(255, 0, 0, 1);
+  transform: scale(1.1);
 }
 
 .add-fav:active {
-  transform: scale(0.95); /* effet de "clic" */
+  transform: scale(0.95);
 }
 
 .add-fav:disabled {
-  background-color: rgba(192, 192, 192, 0.7); /* gris lorsque le bouton est désactivé */
+  background-color: rgba(192, 192, 192, 0.7);
   cursor: not-allowed;
 }
 
 .add-fav i {
   font-size: 1.5rem;
 }
+*/
+.add-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: fill 0.3s ease; /* Transition pour le changement de couleur */
+}
 
-/* Responsive grid layout */
+.add-fav svg path {
+  fill: none;  /* Cœur vide par défaut (pas de remplissage) */
+  stroke: black;  /* Contour noir du cœur */
+}
+
+.add-fav.favorited svg path {
+  fill: red;  /* Cœur rouge quand c'est dans les favoris */
+  stroke: red;  /* Le contour reste noir */
+}
+/* Responsive layout */
 @media (min-width: 600px) {
   .movies {
     grid-template-columns: repeat(2, 1fr);

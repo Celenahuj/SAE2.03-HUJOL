@@ -5,6 +5,7 @@
   <title>SAE2.03 APP</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="./css/base.css" />
 </head>
 
@@ -111,10 +112,25 @@
     };
 
 
-    C.handlerAddFavoris = async function (id) {
+    C.handlerAddFavoris = async function (id, bouton) {
       console.log(id)
       let data = await DataProfile.addFavori(id, C.profil.id_profil);
-     // V.renderMovie(data); 
+      let icone = bouton.querySelector("i");
+
+      // Vérifie si le bouton a la classe "favorited"
+      if (bouton.classList.contains("favorited")) {
+        // Retirer du favoris
+        bouton.classList.remove("favorited");
+        icone.textContent = "♡";  // Cœur vide
+        icone.style.color = "black";  // Cœur noir
+        console.log("Retiré des favoris : " + id);
+      } else {
+        // Ajouter aux favoris
+        bouton.classList.add("favorited");
+        icone.textContent = "♥";  // Cœur plein
+        icone.style.color = "red";  // Cœur rouge
+        console.log("Ajouté aux favoris : " + id);
+      }
     };
 
 
@@ -138,22 +154,22 @@
       content.innerHTML = (!data || data.length === 0)
         ? "<p>Aucun film disponible pour le moment.</p>"
         : Movie.format(data);
-        /*
-      document.querySelectorAll(".movie").forEach((element) => {
-        element.onclick = function () {
-          let movieId = this.dataset.id;
-          C.getDetail(movieId);
-        };
+      /*
+    document.querySelectorAll(".movie").forEach((element) => {
+      element.onclick = function () {
+        let movieId = this.dataset.id;
+        C.getDetail(movieId);
+      };
 
 
-        element.querySelector('.add-fav').onclick = async (e) => {
-          e.stopPropagation();
-          if (!C.profil) {
-            alert("Choisis un profil d'abord !");
-            return;
-          }
-        };
-      });*/
+      element.querySelector('.add-fav').onclick = async (e) => {
+        e.stopPropagation();
+        if (!C.profil) {
+          alert("Choisis un profil d'abord !");
+          return;
+        }
+      };
+    });*/
     };
 
 
