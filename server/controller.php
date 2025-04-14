@@ -143,3 +143,7 @@ function removeFavoriController() {
     $ok = removeFavori($id_profil, $id_film);
     return $ok ? "Film supprimé des favoris !": "Le film n'était pas dans les favoris.";
 }
+
+function getFeaturedMoviesController() {
+    return getFeaturedMovies();
+}

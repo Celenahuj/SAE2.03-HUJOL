@@ -42,4 +42,10 @@ DataMovie.requestMoviecategorie = async function (categorie, age = undefined) {
   let movie = await answer.json();
   return movie;
 };
+
+DataMovie.requestFeaturedMovies = async function () {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getFeatured");
+  let data = await answer.json();
+  return data;
+};
 export { DataMovie };

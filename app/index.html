@@ -15,6 +15,8 @@
   <section class="categories" id="categories"></section>
   <section class="movies" id="content"></section>
   <section class="details" id="details"></section>
+  <h2 class="title">Films mis en avant</h2>
+  <section class="moviesup" id="moviesup"></section>
 
 
   <script type="module">
@@ -24,6 +26,7 @@
     import { Moviecategory } from "./component/MovieCategory/script.js";
     import { DataMovie } from "./data/dataMovie.js";
     import { DataProfile } from "./data/dataProfile.js";
+    import { MovieUp } from "./component/MovieUp/script.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -40,6 +43,8 @@
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
       V.renderMovieCategorie();
+      C.getFeaturedMovies();
+
       /*
       C.getMovie();
       */
@@ -131,6 +136,7 @@
         icone.style.color = "red";  // Cœur rouge
         console.log("Ajouté aux favoris : " + id);
       }
+
     };
 
 
@@ -158,6 +164,16 @@
       C.handlerFavoris();
     };
 
+    C.getFeaturedMovies = async function () {
+      let data = await DataMovie.requestFeaturedMovies();
+
+      if (!data || data.length === 0) {
+        V.renderMovieUp([], true); // Vide la section avec un message
+      } else {
+        V.renderMovieUp(data, true);
+      }
+    };
+
 
 
     // Vue (contient tout ce qui est relatif à l'affichage)
@@ -175,7 +191,7 @@
       header.innerHTML = NavBar.format(hAbout);
     };
 
-    V.renderMovie = function (data, add=true) {
+    V.renderMovie = function (data, add = true) {
       let content = document.querySelector("#content");
       content.innerHTML = (!data || data.length === 0)
         ? "<p>Aucun film disponible pour le moment.</p>"
@@ -221,6 +237,12 @@
       header.innerHTML = NavBar.format(hAbout, profils);
     };
 
+    V.renderMovieUp = function (data, add = true) {
+      let container = document.querySelector("#moviesup");
+      container.innerHTML = (!data || data.length === 0)
+        ? "<p>Aucun film mis en avant pour le moment.</p>"
+        : MovieUp.format(data, add);
+    };
     C.start(); 
   </script>
 </body>
