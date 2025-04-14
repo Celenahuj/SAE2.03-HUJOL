@@ -147,3 +147,22 @@ function removeFavoriController() {
 function getFeaturedMoviesController() {
     return getFeaturedMovies();
 }
+
+
+function searchMoviesController()
+{
+    $titre = $_REQUEST['titre'] ?? null;
+    if (empty($titre))
+        return false;
+    return searchMovies($titre);
+}
+
+function updateStatusController() {
+    $id = $_REQUEST['id'] ?? null;
+    $bool = $_REQUEST['bool'] ?? null;
+
+    if ($id === null || $bool === null) {
+        return false;
+    }
+    return updateStatus($id, $bool);
+}

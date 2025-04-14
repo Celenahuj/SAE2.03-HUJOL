@@ -12,12 +12,14 @@
   <section id="log"></section>
   <section id="addMovie"></section>
   <section id="addprofilMovie"></section>
+  <section id="addstatut"></section>
 
   <script type="module">
     import { Log } from "./component/Log/script.js";
     import { DataMovie } from "./data/dataMovie.js";
     import { AddMovieForm } from './component/MovieForm/script.js';
     import { AddProfilForm } from './component/ProfilForm/script.js';
+    import { BarreRecherche } from './component/StatutForm/script.js';
 
     window.C = {};
 
@@ -52,6 +54,7 @@
       V.renderLog(res);
     }
 
+
     C.start = function () {
       V.renderLog("Démarrage de l'application");
       V.renderNewMovie("C.handlerAdd()");
@@ -75,7 +78,8 @@
       let content = document.querySelector('#addprofilMovie');
       content.innerHTML = AddProfilForm.format(handler);
     }
-    
+
+
     C.start();
   </script>
 </body>

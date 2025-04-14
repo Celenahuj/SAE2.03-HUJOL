@@ -48,4 +48,12 @@ DataMovie.requestFeaturedMovies = async function () {
   let data = await answer.json();
   return data;
 };
+
+DataMovie.requestSearchMovies = async function (value) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=searchMovies&titre=" + value);
+  let data = await answer.json();
+  return data;
+
+};
+
 export { DataMovie };

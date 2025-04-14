@@ -224,3 +224,32 @@ function getFeaturedMovies() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+
+function searchMovies($value)
+{
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.featured, Category.name
+            FROM Movie
+            INNER JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
+    
+    $stmt = $cnx->prepare($sql);
+    $val = '%' . $value . '%';
+    $stmt->bindParam(':titre', $val);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    
+    return $res;
+}
+
+function updateStatus($id, $bool)
+{
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "UPDATE Movie SET featured = :bool WHERE id = :id";
+
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindValue(':bool', $bool ? 1 : 0, PDO::PARAM_INT);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+    return $stmt->execute(); // true si succès, false sinon
+}

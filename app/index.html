@@ -27,6 +27,8 @@
     import { DataMovie } from "./data/dataMovie.js";
     import { DataProfile } from "./data/dataProfile.js";
     import { MovieUp } from "./component/MovieUp/script.js";
+    import { BarreRecherche } from "./component/BarreRecherche/script.js";
+
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -120,22 +122,6 @@
     C.handlerAddFavoris = async function (id, bouton) {
       console.log(id)
       let data = await DataProfile.addFavori(id, C.profil.id_profil);
-      let icone = bouton.querySelector("i");
-
-      // Vérifie si le bouton a la classe "favorited"
-      if (bouton.classList.contains("favorited")) {
-        // Retirer du favoris
-        bouton.classList.remove("favorited");
-        icone.textContent = "♡";  // Cœur vide
-        icone.style.color = "black";  // Cœur noir
-        console.log("Retiré des favoris : " + id);
-      } else {
-        // Ajouter aux favoris
-        bouton.classList.add("favorited");
-        icone.textContent = "♥";  // Cœur plein
-        icone.style.color = "red";  // Cœur rouge
-        console.log("Ajouté aux favoris : " + id);
-      }
 
     };
 
@@ -143,24 +129,7 @@
     C.handlerRemoveFavoris = async function (id, bouton) {
       console.log(id)
       let data = await DataProfile.removeFavori(id, C.profil.id_profil);
-      /*
-      let icone = bouton.querySelector("i");
 
-      // Vérifie si le bouton a la classe "favorited"
-      if (bouton.classList.contains("removed")) {
-        // Retirer du favoris
-        bouton.classList.remove("removed");
-        icone.textContent = "♡";  // Cœur vide
-        icone.style.color = "black";  // Cœur noir
-        console.log("Retiré des favoris : " + id);
-      } else {
-        // Ajouter aux favoris
-        bouton.classList.add("removed");
-        icone.textContent = "♥";  // Cœur plein
-        icone.style.color = "red";  // Cœur rouge
-        console.log("Ajouté aux favoris : " + id);
-        
-      }*/
       C.handlerFavoris();
     };
 
@@ -175,6 +144,22 @@
     };
 
 
+    // Fonction de recherche qui ne modifie pas #header
+    C.handlerBarreRecherche = async function (value) {
+      if (!value || value.trim().length === 0) {
+        return C.getMovie();
+      }
+
+      const results = await DataMovie.requestSearchMovies(value);
+
+      if (!results || results.length === 0) {
+        let infos = document.querySelector("#content");
+        infos.innerHTML = "<p>Aucun film ne correspond à votre recherche.</p>";
+        return;
+      }
+      V.renderMovie(results);
+    };
+
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -186,10 +171,12 @@
      * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
      * formaté par le composant NavBar.
      */
+    /*
     V.renderNavBar = function (hAbout) {
       let header = document.querySelector("#header");
       header.innerHTML = NavBar.format(hAbout);
     };
+    */
 
     V.renderMovie = function (data, add = true) {
       let content = document.querySelector("#content");
@@ -231,10 +218,25 @@
       console.log("test")
     };
 
+    /*
+        function addSearchEventListener() {
+          // Ajoute l'événement uniquement si l'élément existe
+          let searchInput = document.querySelector("#search-input");
+          if (searchInput) {
+            console.error("Le champ de recherche #search-input est introuvable !");
+            searchInput.addEventListener("keyup", function () {
+              C.searchMovies();
+            });
+          }
+        }
+    */
     V.renderNavBar = async function (hAbout) {
       let header = document.querySelector("#header");
       let profils = await DataProfile.readAll();
-      header.innerHTML = NavBar.format(hAbout, profils);
+      header.innerHTML = NavBar.format(hAbout, profils, BarreRecherche);
+
+      // Une fois que la navbar est rendue, on ajoute l'écouteur d'événements
+      /*addSearchEventListener();*/
     };
 
     V.renderMovieUp = function (data, add = true) {
