@@ -87,7 +87,12 @@
     };
 
     C.handlerDetail = async function (id) {
+
       let data = await DataMovie.requestMovieDetails(id);
+     // C.stockID = id;
+    //  let note_moyenne = await C.calculMoyenne(id);
+     // data.note_moyenne = note_moyenne;
+     console.log("renderDetail: ", data);
       V.renderDetail(data);
     };
 
@@ -160,23 +165,43 @@
       V.renderMovie(results);
     };
 
+    // Fonction pour gérer l'envoi de la note
+    C.sendNote = function (event) {
+      // Récupérer la valeur de la note depuis l'input
+      let note = document.querySelector('.Note_form').value;
 
-    // Vue (contient tout ce qui est relatif à l'affichage)
+      // Vérifier si la note est valide (entre 0 et 10)
+      if (note < 0 || note > 10) {
+        alert("Merci de saisir une note entre 0 et 10.");
+        return;
+      }
+
+      // Vérifier si un film est sélectionné
+      if (!C.stockID) {
+        alert("Aucun film sélectionné.");
+        return;
+      }
+
+      // Appeler la fonction pour ajouter la note au film
+      C.handlerAddNote(C.stockID, note);
+    };
+
+    // Fonction pour gérer l'ajout de la note dans la base de données
+    C.handlerAddNote = async function (id_film, note) {
+      if (!C.profil) {
+        alert("Veuillez sélectionner un profil avant de noter.");
+        return;
+      }
+
+      // Ajouter la note au film
+      let result = await DataMovie.addNote(id_film, C.profil.id_profil, note);
+
+      // Vérifier si l'ajout a réussi
+      alert(result === false ? "Vous avez déjà noté ce film." : "Votre note a été enregistrée.");
+    };
+    
     window.V = {};
 
-    /**
-     * V.renderNavBar
-     *
-     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-     * formaté par le composant NavBar.
-     */
-    /*
-    V.renderNavBar = function (hAbout) {
-      let header = document.querySelector("#header");
-      header.innerHTML = NavBar.format(hAbout);
-    };
-    */
 
     V.renderMovie = function (data, add = true) {
       let content = document.querySelector("#content");
@@ -218,25 +243,10 @@
       console.log("test")
     };
 
-    /*
-        function addSearchEventListener() {
-          // Ajoute l'événement uniquement si l'élément existe
-          let searchInput = document.querySelector("#search-input");
-          if (searchInput) {
-            console.error("Le champ de recherche #search-input est introuvable !");
-            searchInput.addEventListener("keyup", function () {
-              C.searchMovies();
-            });
-          }
-        }
-    */
     V.renderNavBar = async function (hAbout) {
       let header = document.querySelector("#header");
       let profils = await DataProfile.readAll();
       header.innerHTML = NavBar.format(hAbout, profils, BarreRecherche);
-
-      // Une fois que la navbar est rendue, on ajoute l'écouteur d'événements
-      /*addSearchEventListener();*/
     };
 
     V.renderMovieUp = function (data, add = true) {

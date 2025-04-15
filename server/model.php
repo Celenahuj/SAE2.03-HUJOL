@@ -60,10 +60,12 @@ function getMovieByAge($age)
 function getDetail($id)
 {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.*, Category.name AS category
+    $sql = "SELECT Movie.*, Category.name AS category, ROUND(COALESCE(SUM(Note.note) * 1.0 / NULLIF(COUNT(Note.note), 0), 0), 1) AS avgNotes, COALESCE(count(Note.id_profil), 0) AS nbNotes
             FROM Movie
-            JOIN Category ON Movie.id_category = Category.id
-            WHERE Movie.id = :id";
+            LEFT JOIN Note ON Note.id_film = Movie.id
+            JOIN Category ON Category.id = Movie.id_category
+            WHERE Movie.id = :id
+            GROUP BY Movie.id";
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -252,4 +254,44 @@ function updateStatut($id, $bool)
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
     return $stmt->execute(); // true si succès, false sinon
+}
+
+function addNote($id_film, $id_profil, $note) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    // Vérifier si l'utilisateur a déjà noté ce film
+    $sql_check = "SELECT * FROM Note WHERE id_film = :id_film AND id_profil = :id_profil";
+    $stmt_check = $cnx->prepare($sql_check);
+    $stmt_check->bindParam(':id_film', $id_film);
+    $stmt_check->bindParam(':id_profil', $id_profil);
+    $stmt_check->execute();
+
+    // Si l'utilisateur a déjà noté, on ne permet pas de noter à nouveau
+    if ($stmt_check->rowCount() > 0) {
+        return false;
+    }
+
+    // Insérer la nouvelle note dans la base de données
+    $sql = "INSERT INTO Note (id_film, id_profil, note) VALUES (:id_film, :id_profil, :note)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_film', $id_film);
+    $stmt->bindParam(':id_profil', $id_profil);
+    $stmt->bindParam(':note', $note);
+
+    return $stmt->execute();
+}
+
+function getMoyenne($id_film) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    
+    // Récupérer la note moyenne pour le film
+    $sql = "SELECT AVG(note) as moyenne_note FROM Note WHERE id_film = :id_film";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_film', $id_film);
+    $stmt->execute();
+    
+    $res = $stmt->fetch(PDO::FETCH_OBJ);
+    
+    return $res->moyenne_note;
 }

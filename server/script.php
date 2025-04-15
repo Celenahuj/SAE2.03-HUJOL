@@ -112,6 +112,14 @@ if ( isset($_REQUEST['todo']) ){
       $data = updateStatutController();
       break;
 
+    case 'addNote':
+      $data = addNoteController();
+      break;
+    
+    case 'getMoyenne':
+        $data = getMoyenneController();
+        break;
+
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
       http_response_code(400); // 400 == "Bad request"

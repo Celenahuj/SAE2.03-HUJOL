@@ -56,4 +56,16 @@ DataMovie.requestSearchMovies = async function (value) {
 
 };
 
+DataMovie.addNote = async function(id_film, id_profil, note) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=addNote&id_film=" + id_film + "&id_profil=" + id_profil + "&note=" + note);
+  let data = await answer.json();
+  return data;
+};
+
+DataMovie.getNotes = async function(id_film) {
+  let response = await fetch(HOST_URL + "/server/script.php?todo=getNotes&id_film=" + id_film);
+  let data = await response.json();
+  return data.notes; 
+};
+
 export { DataMovie };

@@ -166,3 +166,42 @@ function updateStatutController() {
     }
     return updateStatut($id, $bool);
 }
+
+
+function addNoteController() {
+    $id_film = $_REQUEST['id_film'] ?? null;
+    $id_profil = $_REQUEST['id_profil'] ?? null;
+    $note = $_REQUEST['note'] ?? null;
+
+    // Vérifier si les paramètres sont valides
+    if (!$id_film || !$id_profil || !$note || !is_numeric($note) || $note < 1 || $note > 10) {
+        return "Erreur : paramètres invalides.";
+    }
+
+    // Appeler la fonction pour ajouter la note
+    $ok = addNote($id_film, $id_profil, $note);
+
+    if ($ok === false) {
+        return "Erreur : vous avez déjà noté ce film.";
+    }
+
+    // Retourner un message de succès
+    return "Votre note a été enregistrée.";
+}
+
+function getMoyenneController() {
+    $id_film = $_REQUEST['id_film'] ?? null;
+
+    if (!$id_film) {
+        return "Erreur : film manquant.";
+    }
+
+    // Appeler la fonction pour obtenir la note moyenne
+    $moyenne_note = getMoyenne($id_film);
+
+    if ($moyenne_note === null) {
+        return "Aucune note disponible pour ce film.";
+    }
+
+    return ["moyenne_note" => $moyenne_note];
+}
