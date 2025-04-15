@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>SAE2.03 ADMIN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
+
+<body>
+  <section id="log"></section>
+  <section id="addMovie"></section>
+  <section id="addprofilMovie"></section>
+  <section id="addstatut"></section>
+
+  <script type="module">
+    import { Log } from "./component/Log/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { AddMovieForm } from './component/MovieForm/script.js';
+    import { AddProfilForm } from './component/ProfilForm/script.js';
+    import { StatutForm } from "./component/StatutForm/script.js";
+
+    window.C = {};
+
+    C.handlerAdd = async function () {
+      // Sélectionne l'élément possédant la classe `.addMenu__form`
+      // il s'agit de l'élément <form> du composant NewMenuForm
+      let form = document.querySelector('.addMovie__form');
+      /* 
+          Il faut comprendre l'instruction "new FormData(form)" ainsi : 
+          "créer un nouvel objet FormData à partir du formulaire form"
+          Les objets FormData sont des objets natifs du langage Javascript.
+          Très pratique, les créer revient à extraire automatiquement les données
+          du formulaire sous forme de paires clé/valeur ou la clé est le nom de
+          l'élément du formulaire et la valeur est la valeur de l'élément.
+          Par exemple : {jour: 'lundi', entree: 'salade', plat: 'steak', dessert: 'tarte'}
+          Surtout un FormData peut être placé tel quel dans le corps (body) d'une requête
+          HTTP pour être envoyé à un serveur.
+      */
+      let fd = new FormData(form);
+      // Attend la réponse de la fonction `DataMenu.update(fd)`
+      let res = await DataMovie.add(fd);
+      // Affiche le résultat de la mise à jour dans le journal
+      V.renderLog(res);
+    }
+
+    C.handlerAddProfil = async function () {
+      let form = document.querySelector('.addProfil__form');
+      let fd = new FormData(form);
+
+      let res = await DataMovie.addprofil(fd);
+
+      V.renderLog(res);
+    }
+
+    C.handlerBarreRecherche = async function (value) {
+      let data = document.querySelector(".resultatsRecherche");
+
+      if (!value || value.trim() === "") {
+        data.innerHTML = "";
+        return;
+      }
+
+      const results = await DataMovie.requestSearchMovies(value);
+
+      if (!results || results.length === 0) {
+        data.innerHTML = "<p>Aucun film ne correspond à votre recherche.</p>";
+        return;
+      }
+
+      data.innerHTML = StatutForm.format(results);
+    };
+
+    C.handlerStatut = async function (id, statut) {
+
+      console.log("id:", id); 
+      console.log("Statut:", statut);
+      let res = await DataMovie.addstatut(id, statut);
+      V.renderLog(res.message || "Statut mis à jour");
+
+      let input = document.querySelector(".BarreRecherche_form");
+      if (input) C.handlerBarreRecherche(input.value);
+    };
+
+    C.start = function () {
+      V.renderLog("Démarrage de l'application");
+      V.renderNewMovie("C.handlerAdd()");
+      V.renderProfil("C.handlerAddProfil()");
+      V.renderStatut();
+    };
+
+    window.V = {};
+
+    V.renderLog = function (txt) {
+      let content = document.querySelector("#log");
+      content.innerHTML = Log.format(txt);
+    };
+
+    V.renderNewMovie = function (handler) {
+      let content = document.querySelector('#addMovie');
+      content.innerHTML = AddMovieForm.format(handler);
+    }
+
+    V.renderProfil = function (handler) {
+      let content = document.querySelector('#addprofilMovie');
+      content.innerHTML = AddProfilForm.format(handler);
+    }
+
+    V.renderStatut = function () {
+      let container = document.querySelector("#addstatut");
+      container.innerHTML = StatutForm.template;
+    };
+
+    C.start();
+  </script>
+</body>
+
+</html>

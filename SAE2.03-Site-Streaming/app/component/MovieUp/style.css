@@ -1,0 +1,170 @@
+.title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  margin-block: 2rem;
+}
+
+
+.moviesup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+  justify-items: center;
+  background-color: var(--color-white);
+  font-family: var(--ff-sans);
+}
+
+.movieup {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  /* limite la taille des cartes */
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+.movieup:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
+}
+
+.movieup figure {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.movieup__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.movieup_title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  margin: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+}
+
+/*
+.add-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.25rem;
+  z-index: 2;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.add-fav:hover {
+  background-color: rgba(255, 0, 0, 1);
+  transform: scale(1.1);
+}
+
+.add-fav:active {
+  transform: scale(0.95);
+}
+
+.add-fav:disabled {
+  background-color: rgba(192, 192, 192, 0.7);
+  cursor: not-allowed;
+}
+
+.add-fav i {
+  font-size: 1.5rem;
+}
+*/
+.add-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: fill 0.3s ease; /* Transition pour le changement de couleur */
+}
+
+.add-fav svg path {
+  fill: none;  /* Cœur vide par défaut (pas de remplissage) */
+  stroke: black;  /* Contour noir du cœur */
+}
+
+.add-fav.favorited svg path {
+  fill: red;  /* Cœur rouge quand c'est dans les favoris */
+  stroke: red;  /* Le contour reste noir */
+}
+
+
+.remove-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: fill 0.3s ease; 
+}
+
+.remove-fav svg path {
+  fill: red;  /* Cœur vide par défaut (pas de remplissage) */
+  stroke: red;  /* Contour noir du cœur */
+}
+
+.remove-fav.removed svg path {
+  fill: nome ; /* Cœur rouge quand c'est dans les favoris */
+  stroke: black;  /* Le contour reste noir */
+}
+
+
+/* Responsive layout */
+@media (min-width: 600px) {
+  .moviesup {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .moviesup {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .moviesup {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .moviesup {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

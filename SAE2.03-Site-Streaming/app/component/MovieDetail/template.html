@@ -1,0 +1,21 @@
+<div class="moviedetail">
+  <figure class="movieinfos">
+    <figcaption>
+      <h1 class="movie__title">{{name}}</h1>
+      <p class="movie__year">L’année de sortie : {{year}}</p>
+      <p class="movie__description">Une description : {{description}}</p>
+      <p class="movie__category">La catégorie du film : {{category}}</p>
+      <p class="movie__min_age">Les restrictions d'âge : {{min_age}}</p>
+      <p class="movie__director">Le réalisateur : {{director}}</p>
+      <p class="movie__note-moyenne">Avis moyen: {{note_moyenne}} /10</p>
+    </figcaption>
+    <img src="https://mmi.unilim.fr/~hujol3/SAE2.03-HUJOL/server/images/{{image}}" alt="affiche" class="movie__image" />
+  </figure>
+  <iframe class="movie__video" width="300" height="200" src="{{trailer}}">
+  </iframe>
+  <div class="note-section">
+    <label for="note">Noter ce film :</label>
+    <input type="number" min="0" max="10" placeholder="Note sur 10" class="Note_form" />
+    <button onclick="C.sendNote(event)">Envoyer</button>
+  </div>
+</div>
