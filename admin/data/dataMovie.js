@@ -22,4 +22,16 @@ DataMovie.addprofil = async function (fdata) {
     return data;
 }
 
+DataMovie.addstatut = async function (id, bool) {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=updateStatut&id=" + id + "&bool=" + bool);
+    let data = await answer.json();
+    return data;
+};
+
+DataMovie.requestSearchMovies = async function (value) {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=searchMovies&titre=" + value);
+    let data = await answer.json();
+    return data;
+  
+  };
 export { DataMovie };

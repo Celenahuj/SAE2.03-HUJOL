@@ -104,13 +104,12 @@ if ( isset($_REQUEST['todo']) ){
       $data = getFeaturedMoviesController();
       break;
 
-
     case 'searchMovies':
       $data = searchMoviesController();
       break;
 
-    case 'updateStatus':
-      $data = updateStatusController();
+    case 'updateStatut':
+      $data = updateStatutController();
       break;
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée

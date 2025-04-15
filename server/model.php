@@ -228,7 +228,7 @@ function getFeaturedMovies() {
 function searchMovies($value)
 {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.featured, Category.name
+    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.year, Movie.min_age, Movie.description, Movie.featured, Category.name as category
             FROM Movie
             INNER JOIN Category ON Movie.id_category = Category.id
             WHERE Movie.name LIKE :titre OR Category.name LIKE :titre OR year LIKE :titre";
@@ -242,7 +242,7 @@ function searchMovies($value)
     return $res;
 }
 
-function updateStatus($id, $bool)
+function updateStatut($id, $bool)
 {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $sql = "UPDATE Movie SET featured = :bool WHERE id = :id";

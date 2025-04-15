@@ -157,12 +157,12 @@ function searchMoviesController()
     return searchMovies($titre);
 }
 
-function updateStatusController() {
+function updateStatutController() {
     $id = $_REQUEST['id'] ?? null;
     $bool = $_REQUEST['bool'] ?? null;
 
     if ($id === null || $bool === null) {
         return false;
     }
-    return updateStatus($id, $bool);
+    return updateStatut($id, $bool);
 }

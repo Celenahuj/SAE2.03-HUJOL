@@ -19,7 +19,7 @@
     import { DataMovie } from "./data/dataMovie.js";
     import { AddMovieForm } from './component/MovieForm/script.js';
     import { AddProfilForm } from './component/ProfilForm/script.js';
-    import { BarreRecherche } from './component/StatutForm/script.js';
+    import { StatutForm } from "./component/StatutForm/script.js";
 
     window.C = {};
 
@@ -54,12 +54,40 @@
       V.renderLog(res);
     }
 
+    C.handlerBarreRecherche = async function (value) {
+      let data = document.querySelector(".resultatsRecherche");
+
+      if (!value || value.trim() === "") {
+        data.innerHTML = "";
+        return;
+      }
+
+      const results = await DataMovie.requestSearchMovies(value);
+
+      if (!results || results.length === 0) {
+        data.innerHTML = "<p>Aucun film ne correspond à votre recherche.</p>";
+        return;
+      }
+
+      data.innerHTML = StatutForm.format(results);
+    };
+
+    C.handlerStatut = async function (id, statut) {
+
+      console.log("id:", id); 
+      console.log("Statut:", statut);
+      let res = await DataMovie.addstatut(id, statut);
+      V.renderLog(res.message || "Statut mis à jour");
+
+      let input = document.querySelector(".BarreRecherche_form");
+      if (input) C.handlerBarreRecherche(input.value);
+    };
 
     C.start = function () {
       V.renderLog("Démarrage de l'application");
       V.renderNewMovie("C.handlerAdd()");
       V.renderProfil("C.handlerAddProfil()");
-
+      V.renderStatut();
     };
 
     window.V = {};
@@ -79,6 +107,10 @@
       content.innerHTML = AddProfilForm.format(handler);
     }
 
+    V.renderStatut = function () {
+      let container = document.querySelector("#addstatut");
+      container.innerHTML = StatutForm.template;
+    };
 
     C.start();
   </script>
