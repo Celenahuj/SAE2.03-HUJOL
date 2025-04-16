@@ -6,8 +6,8 @@ let BarreRecherche = {};
 BarreRecherche.format = function () {
   return `
     <input 
-      type="text" 
-      placeholder="Rechercher un film..." 
+      type="text"
+      class="BarreRecherche__form" 
       oninput="C.handlerBarreRecherche(this.value)"
     />
   `;

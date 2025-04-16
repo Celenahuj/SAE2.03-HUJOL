@@ -1,63 +1,123 @@
 .navbar {
-  background-color: #333;
+  background-color: #1E1E1E;
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between; /* Aligne les éléments à gauche et à droite */
-  align-items: center;
+  font-family: sans-serif;
   border-radius: 5px;
+  flex-wrap: wrap;
 }
 
-/* Liste de la navigation */
+/* === NAVBAR LIST (LOGO, RECHERCHE, HOME) === */
 .navbar__list {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
-/* Item de la liste de navigation (Accueil) */
+/* === LOGO === */
+.navbar__logo {
+  height: 1.6rem;
+}
+
+/* === ITEM (HOME + TEXTE) === */
 .navbar__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: white;
-  padding: 10px 15px;
-  cursor: pointer;
-  text-transform: uppercase;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
-/* Effet au survol de l'item "Accueil" */
-.navbar__item:hover {
+/* === ICONES HOME + FAVORI === */
+.navbar__home,
+.navbar__favori {
+  height: 1rem;
+  color: white;
+}
+
+/* === BARRE DE RECHERCHE (inspirée Plex) === */
+.navbar__list input[type="text"] {
+  background-color: #2b2b2b;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 38px 8px 15px;
+  color: white;
+  font-size: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  width: 10%;
+}
+
+.navbar__list input[type="text"]:focus {
+  outline: none;
+  background-color: #333;
+}
+
+/* === NAVBAR RIGHT (FAVORI + SELECT) === */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* === SELECT PROFIL === */
+.navbar__options {
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgb(70, 70, 70);
+  border-radius: 25px;
+  padding: 8px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
+}
+
+.navbar__options:hover {
   background-color: #444;
 }
 
-/* Menu déroulant pour sélectionner un profil */
-.navbar__options {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #fff;
-  font-size: 16px;
-  color: #333;
-  cursor: pointer;
-  margin-left: 20px; /* Espacement à gauche entre "Accueil" et le menu déroulant */
-  transition: background-color 0.3s ease;
-}
-
-/* Effet au survol du menu déroulant */
-.navbar__options:hover {
-  background-color: #f1f1f1;
-}
-
-/* Styles pour les options du menu déroulant */
 .navbar__options option {
-  padding: 10px;
   background-color: #fff;
   color: #333;
   font-size: 16px;
 }
 
-/* Effet au survol des options du menu déroulant */
-.navbar__options option:hover {
-  background-color: #f1f1f1;
+/* === DESKTOP AMÉLIORÉ === */
+@media screen and (min-width: 768px) {
+  .navbar__logo {
+    height: 2rem;
+  }
+
+  .navbar__home,
+  .navbar__favori {
+    height: 1.5rem;
+  }
+
+  .navbar__list input[type="text"] {
+    width: 40%;
+    font-size: 16px;
+  }
+
+  .navbar__list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
 }

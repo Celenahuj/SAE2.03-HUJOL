@@ -27,6 +27,7 @@ ol,ul{
 body {
   min-height: 100vh;
   line-height: 1.5;
+  background-color: #1E1E1E;
 }
 
 /* Set shorter line heights on headings and interactive elements */

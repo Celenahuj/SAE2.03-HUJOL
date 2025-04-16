@@ -12,8 +12,8 @@
 <body>
   <header id="header"></header>
 
-  <section class="categories" id="categories"></section>
   <section class="movies" id="content"></section>
+  <section class="categories" id="categories"></section>
   <section class="details" id="details"></section>
   <h2 class="title">Films mis en avant</h2>
   <section class="moviesup" id="moviesup"></section>
@@ -41,9 +41,12 @@
       C.getMovie(C.profil.age);
     };
 
+    C.handlerLogo = function () {
+      C.getMovie(C.profil.age);
+    };
 
     C.start = function () {
-      V.renderNavBar("C.handlerAbout()");
+      V.renderNavBar("C.handlerAbout()", "C.handlerLogo()");
       V.renderMovieCategorie();
       C.getFeaturedMovies();
 
@@ -68,7 +71,7 @@
       infos.innerHTML = "";
 
       if (C.profil == null) {
-        infos.innerHTML = "<p>Veuillez sélectionner un profil pour voir les films accessibles.</p>";
+        infos.innerHTML = "<p class='movie__message>Veuillez sélectionner un profil pour voir les films accessibles.</p>";
         return; // Arrêter la fonction si aucun profil n'est sélectionné
       }
       let data = await DataMovie.requestMovies(age); // ne pas encore filtrer ici
@@ -79,7 +82,7 @@
       });
 
       if (filmsVisibles.length === 0) {
-        infos.innerHTML = "<p>Aucun film n'est accessible pour votre âge.</p>";
+        infos.innerHTML = "<p class='movie__message>Aucun film n'est accessible pour votre âge.</p>";
         return;
       }
 
@@ -159,7 +162,7 @@
 
       if (!results || results.length === 0) {
         let infos = document.querySelector("#content");
-        infos.innerHTML = "<p>Aucun film ne correspond à votre recherche.</p>";
+        infos.innerHTML = "<p class='movie__message>Aucun film ne correspond à votre recherche.</p>";
         return;
       }
       V.renderMovie(results);
@@ -206,7 +209,7 @@
     V.renderMovie = function (data, add = true) {
       let content = document.querySelector("#content");
       content.innerHTML = (!data || data.length === 0)
-        ? "<p>Aucun film disponible pour le moment.</p>"
+        ? "<p class='movie__message'>Aucun film disponible pour le moment.</p>"
         : Movie.format(data, add);
     };
 
@@ -243,16 +246,16 @@
       console.log("test")
     };
 
-    V.renderNavBar = async function (hAbout) {
+    V.renderNavBar = async function (hAbout, hLogo) {
       let header = document.querySelector("#header");
       let profils = await DataProfile.readAll();
-      header.innerHTML = NavBar.format(hAbout, profils, BarreRecherche);
+      header.innerHTML = NavBar.format(hAbout, hLogo, profils, BarreRecherche);
     };
 
     V.renderMovieUp = function (data, add = true) {
       let container = document.querySelector("#moviesup");
       container.innerHTML = (!data || data.length === 0)
-        ? "<p>Aucun film mis en avant pour le moment.</p>"
+        ? "<p class='movie__message>Aucun film mis en avant pour le moment.</p>"
         : MovieUp.format(data, add);
     };
     C.start(); 

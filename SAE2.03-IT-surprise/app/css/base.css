@@ -9,3 +9,4 @@
 @import "../component/MovieDetail/style.css" layer(components);
 @import "../component/MovieCategory/style.css" layer(components);
 @import "../component/MovieUp/style.css" layer(components);
+@import "../component/BarreRecherche/style.css" layer(components);
