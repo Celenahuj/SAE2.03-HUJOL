@@ -1,98 +1,107 @@
+.title{
+  text-align: left;
+  font-size: 1.5rem;
+  margin-block: 1rem;
+  margin-left: 1rem;
+  color: var(--color-white);
+}
+
 .movies {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  padding: 0.5rem;
-  justify-items: center;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem;
+  justify-content: flex-start;
   background-color: transparent;
   font-family: var(--ff-sans);
+  box-sizing: border-box;
+  white-space: nowrap; 
+}
+
+
+.movies::-webkit-scrollbar {
+  height: 0.5rem;
+}
+
+.movies::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.movies::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 0.5rem;
+}
+
+.movies::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+.movies {
+  scrollbar-color: #999 transparent; 
+  scrollbar-width: thin;
 }
 
 .movie {
+  flex: 0 0 auto; 
+  width: 15rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
-  width: 100%;
-  max-width: 16rem;
-  /* limite la taille des cartes */
-  border-radius: 0.5rem;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-}
-
-.movie:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
-}
-
-.movie figure {
-  margin: 0;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
 }
 
 .movie__img {
   width: 100%;
+  aspect-ratio: 2 / 3; 
+  object-fit: cover;
+  display: block;
+  flex-grow: 1;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+
+.movie__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: none;
+  background: transparent;
+  margin: 0;
+  display: flex;
+  padding-top: .5rem;
+}
+
+
+.movie__date{
+  font-size: .75rem;
+  font-weight: 600;
+  color: rgb(156, 156, 156);
+  text-shadow: none;
+  background: transparent;
+  margin: 0;
+  display: flex;
+  padding-top: .5rem;
+}
+
+.movie__cardimg {
+  margin: 0;
+  width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie__img {
+  width: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
 }
 
-.movie__title {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-  padding: 0.5rem 1rem;
-  margin: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  box-sizing: border-box;
-  display: flex;
-  align-items: flex-end;
-}
 
-.movie__message{
-  color: var(--color-white);
-}
-/*
-.add-fav {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(255, 0, 0, 0.8);
-  color: white;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.25rem;
-  z-index: 2;
-  transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-.add-fav:hover {
-  background-color: rgba(255, 0, 0, 1);
-  transform: scale(1.1);
-}
-
-.add-fav:active {
-  transform: scale(0.95);
-}
-
-.add-fav:disabled {
-  background-color: rgba(192, 192, 192, 0.7);
-  cursor: not-allowed;
-}
-
-.add-fav i {
-  font-size: 1.5rem;
-}
-*/
 .add-fav {
   position: absolute;
   top: 10px;
@@ -101,17 +110,7 @@
   border: none;
   cursor: pointer;
   font-size: 2rem;
-  transition: fill 0.3s ease; /* Transition pour le changement de couleur */
-}
-
-.add-fav svg path {
-  fill: none;  /* Cœur vide par défaut (pas de remplissage) */
-  stroke: black;  /* Contour noir du cœur */
-}
-
-.add-fav.favorited svg path {
-  fill: red;  /* Cœur rouge quand c'est dans les favoris */
-  stroke: red;  /* Le contour reste noir */
+  transition: fill 0.3s ease; 
 }
 
 
@@ -124,40 +123,4 @@
   cursor: pointer;
   font-size: 2rem;
   transition: fill 0.3s ease; 
-}
-
-.remove-fav svg path {
-  fill: red;  /* Cœur vide par défaut (pas de remplissage) */
-  stroke: red;  /* Contour noir du cœur */
-}
-
-.remove-fav.removed svg path {
-  fill: nome ; /* Cœur rouge quand c'est dans les favoris */
-  stroke: black;  /* Le contour reste noir */
-}
-
-
-/* Responsive layout */
-@media (min-width: 600px) {
-  .movies {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .movies {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .movies {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 1280px) {
-  .movies {
-    grid-template-columns: repeat(5, 1fr);
-  }
 }

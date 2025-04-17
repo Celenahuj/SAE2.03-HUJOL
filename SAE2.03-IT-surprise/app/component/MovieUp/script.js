@@ -18,6 +18,7 @@ MovieUp.format = function (movies, add = true) {
 
     moviehtml = moviehtml.replace("{{image}}", movie.image);
     moviehtml = moviehtml.replace("{{title}}", movie.name);
+    moviehtml = moviehtml.replace("{{year}}", movie.year);
     moviehtml = moviehtml.replaceAll("{{id}}", movie.id);
     html += moviehtml;
   });

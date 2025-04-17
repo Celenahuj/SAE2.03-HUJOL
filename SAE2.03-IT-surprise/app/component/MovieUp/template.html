@@ -1,9 +1,8 @@
 <div class="movieup">
-  <figure onclick="C.handlerDetail({{id}})">
-    <figcaption>
-      <h1 class="movieup_title">{{title}}</h1>
-    </figcaption>
+  <figure class="movieup__cardimg" onclick="C.handlerDetail({{id}})">
     <img src="../server/images/{{image}}" alt="affiche" class="movieup__img" />
   </figure>
+  <h1 class="movieup__title">{{title}}</h1>
+  <h1 class="movieup__year">{{year}}</h1>
   {{button}}
 </div>

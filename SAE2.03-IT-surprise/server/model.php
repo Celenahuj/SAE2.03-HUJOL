@@ -23,7 +23,7 @@ function getMovie()
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "select name, image, id from Movie ";
+    $sql = "select name, image,year, id from Movie ";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
     // Lie le paramètre à la valeur
@@ -40,7 +40,7 @@ function getMovieByAge($age)
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
     // Requête SQL pour récupérer les films filtrés par âge
-    $sql = "SELECT name, image, id FROM Movie WHERE min_age <= :age";
+    $sql = "SELECT name, image, id,year FROM Movie WHERE min_age <= :age";
 
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
@@ -221,7 +221,7 @@ function getFavorisByProfil($id_profil) {
 
 function getFeaturedMovies() {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image FROM Movie WHERE featured = 1";
+    $sql = "SELECT id, name,year, image FROM Movie WHERE featured = 1";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
