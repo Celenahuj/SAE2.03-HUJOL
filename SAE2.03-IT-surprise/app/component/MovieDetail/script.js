@@ -15,6 +15,7 @@ MovieDetail.format =  function (movie) {
   moviehtml = moviehtml.replace("{{category}}", movie.category);
   moviehtml = moviehtml.replace("{{min_age}}", movie.min_age);
   moviehtml = moviehtml.replace("{{trailer}}", movie.trailer);
+  moviehtml = moviehtml.replace("{{image}}", movie.image);
   moviehtml = moviehtml.replace("{{note_moyenne}}", movie.avgNotes || "Aucune note");
 
   return moviehtml;

@@ -1,78 +1,81 @@
 .BarreRecherche {
   display: flex;
   justify-content: center;
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+  background-color:var(--color-white);
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1);
 }
 
 .BarreRecherche_form {
+  display: block;
   width: 60%;
-  max-width: 600px;
-  padding: 12px 20px;
-  font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 30px;
-  background-color: #f9f9f9;
+  max-width: 37.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border: 0.125rem solid #ccc;
+  border-radius: 1.875rem;
+  background-color: var(--color-white);
   transition: all 0.3s ease;
 }
 
 .BarreRecherche_form:focus {
   outline: none;
   border-color: #888;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.2);
 }
 
-/* Résultats */
 .resultatsRecherche {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px 20px;
-  gap: 20px;
+  gap: 1.25rem;
+  padding: 1.875rem 1.25rem;
 }
 
-/* Carte de film */
 .movie-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 280px;
+  display: block;
+  width: 17.5rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-white);
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
 }
 
 .movie-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-0.25rem);
 }
 
 .movie_title {
-  font-size: 20px;
-  margin: 0 0 10px 0;
+  display: block;
+  margin: 0 0 0.625rem 0;
+  font-size: 1.25rem;
   color: #333;
 }
 
 .movie_category {
-  font-size: 15px;
+  display: block;
+  margin-bottom: 0.625rem;
+  font-size: 0.9375rem;
   color: #666;
-  margin-bottom: 10px;
 }
 
 .movie_statut {
+  display: block;
+  margin-bottom: 0.9375rem;
   font-weight: 500;
-  margin-bottom: 15px;
   color: #999;
 }
 
-/* Bouton */
 .movie-card button {
-  background-color: #ccc;
-  color: #333;
-  border: none;
-  padding: 9px 16px;
-  border-radius: 6px;
+  display: inline-block;
   cursor: pointer;
-  font-size: 14px;
+  padding: 0.5625rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: #333;
+  background-color: #ccc;
   transition: background-color 0.3s ease;
 }
 

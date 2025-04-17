@@ -2,15 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  /* Primitive Tokens */
-  --color-black: hsl(253, 69%, 8%);
+  --color-black: hsl(0, 0%, 0%);
   --color-white: hsl(0, 0%, 100%);
-  --color-gray-light: hsl(0, 0%, 80%);
-  --color-gray: hsl(0, 0%, 50%);
-  --color-gray-dark: hsl(0, 0%, 20%);
-  --ff-sans: "DM sans", sans-serif;
+  --color-grey: #888;
+  --color-grey-dark: #666;
+  --color-light-grey: rgb(156, 156, 156);
 
-  /* Sementic Tokens */
-  --color-fg: var(--color-white);
-  --color-bg: var(--color-gray-dark);
+  --ff-sans: "Inter", sans-serif;
 }

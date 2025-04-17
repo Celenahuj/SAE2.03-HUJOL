@@ -1,25 +1,53 @@
 .moviedetail {
-  font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin: 2.5rem auto;
+  max-width: 50rem;
+  padding: 1.25rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.moviedetail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); 
+  z-index: 0;
+}
+.moviedetail * {
+  position: relative;
+  z-index: 1;
 }
 
 .movieinfos {
   display: flex;
-  gap: 30px;
+  gap: 1.875rem;
   flex-direction: row-reverse;
   margin: 0;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
+}
+
+.movie__video {
+  display: block;
+  width: 100%;
+  height: 18.75rem;
+  border: 0.0625rem solid #ccc;
+  background-color: #e8ebee;
 }
 
 .movie__image {
-  width: 300px;
+  width: 18.75rem;
   height: auto;
   object-fit: cover;
-  background-color: #e8ebee; /* même couleur que sur la maquette */
-  border: 1px solid #ccc;
+  border: 0.0625rem solid #ccc;
+  background-color: var(--color-white);
 }
 
 figcaption {
@@ -30,63 +58,64 @@ figcaption {
 }
 
 .moviedetail__title {
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
-.movie__year,
-.movie__description,
-.movie__category,
-.movie__min_age,
-.movie__director {
-  font-size: 16px;
-  margin-bottom: 10px;
+.moviedetailtitle,
+.movieyear,
+.moviedescription,
+.moviecategory,
+.moviemin_age,
+.moviedirector {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Style pour la vidéo */
-.movie__video {
-  width: 100%;
-  height: 300px;
-  border: 1px solid #ccc;
-  background-color: #e8ebee;
+.movie__message {
+  color: var(--color-white);
 }
-.details{
+
+.details {
   display: none;
 }
 
-.details.open{
-  position: fixed;
-  inset:0;
+.details.open {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  inset: 0;
   z-index: 10;
+  background-color: rgba(0, 0, 0, 0.8);
 }
-
 
 .close {
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  padding: 0px 0px 6px 0px;
-  top: 35px;
-  right: 35px;
-  width: 40px;
-  height: 40px;
+  padding: 0 0 0.375rem 0;
+  top: 2.1875rem;
+  right: 2.1875rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   color: #f1f1f1;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: bold;
   border: none;
   cursor: pointer;
   transition: transform 0.3s;
 }
 
+.close:hover {
+  transform: scale(1.1);
+}
+
 button {
   background: none;
   border: none;
 }
+

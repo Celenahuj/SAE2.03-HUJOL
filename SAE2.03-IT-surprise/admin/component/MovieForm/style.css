@@ -6,23 +6,26 @@
 }
 
 .addMovie {
-  width: 350px;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  display: block;
+  width: 21.875rem;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  font-family: var(--ff-sans);
+  color: var(--color-white);
+  background: #1E1E1E;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
 }
 
 .addMovie__title {
-  background: black;
-  color: white;
+  display: block;
+  padding: 0.625rem;
+  margin: -1.25rem -1.25rem 1.25rem -1.25rem;
   text-align: center;
-  padding: 10px;
-  font-size: 18px;
-  margin: -20px -20px 20px -20px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-white);
 }
 
 .addMovie__form {
@@ -33,23 +36,35 @@
 .addMovie__form input,
 .addMovie__form select,
 .addMovie__form textarea {
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  display: block;
+
+  margin-bottom: 0.625rem;
+  padding: 0.5rem;
+  border: 0.0625rem solid #444;
+  border-radius: 0.25rem;
+
+  font-size: 0.875rem;
+  color: var(--color-white);
+
+  background-color: #2b2b2b;
 }
 
 .addMovie__form input[type="button"] {
-  background: black;
-  color: white;
+  display: block;
   cursor: pointer;
+
+  padding: 0.625rem;
   border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
+  border-radius: 0.25rem;
+
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-black);
+
+  background: var(--color-white);
+  transition: background-color 0.3s ease;
 }
 
 .addMovie__form input[type="button"]:hover {
-  background: #333;
+  background: #cccccc;
 }
