@@ -1,0 +1,75 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #cfcfcf;
+    margin: 0;
+    padding: 40px;
+}
+
+.Site {
+    max-width: 650px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.phrase {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 36px;
+    color: #222;
+}
+
+
+.titre {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #222;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.menu a {
+    display: block;
+    padding: 14px 18px;
+    background-color: #fafafa;
+    text-decoration: none;
+    color: #222;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.menu a:hover {
+    background-color: #ececec;
+    transform: translateX(4px);
+}
+
+/* Légères couleurs à gauche pour distinguer */
+.menu-1 {
+    border-left: 4px solid #2196F3;
+}
+
+.menu-2 {
+    border-left: 4px solid #4CAF50;
+}
+
+.menu-3 {
+    border-left: 4px solid #FF9800;
+}
+
+.menu-4 {
+    border-left: 4px solid #9C27B0;
+}
+
+.menu-5 {
+    border-left: 4px solid #F44336;
+}
